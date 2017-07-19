@@ -19,7 +19,7 @@ module.exports = {
 };
 
 var reqJson = {  
-   "messageid":"da4067d5-7532-40d1-8763-9f19f02d4f9e",
+   "messageid":"da4067d5-7532-40d1-8763-9f19f02d4f9g",
    "request":{  
       "instanceid":"75b3e303-ec4f-4643-b483-f98d975a5d24",
       "responsetopic":"parking.policy.request",
@@ -62,8 +62,6 @@ var resJson = {
 
 var getPolicyCategoryReqTopic = 'getPolicyCategoryReqTopic';
 
-var latestOffset = 0;
-
 function getPolicyCategory(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
@@ -71,6 +69,8 @@ function getPolicyCategory(req, res) {
     var policyCategoryId = params.policycategoryid.value;
 
     console.log('orgId:'+orgId+' siteId:'+siteId+' policyCategoryId:'+policyCategoryId);
+    //Construct the payload that has to be sent to Kafka
+
 
     //Send the message to Kafka. 
     producer.produceGetPolicyCategoryMessage(getPolicyCategoryReqTopic, reqJson, function(err, msg){

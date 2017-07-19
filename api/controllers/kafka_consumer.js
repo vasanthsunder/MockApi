@@ -13,11 +13,10 @@ var client = new Client('localhost:2181');
 var offset = new Offset(client);
 let latestOffset = 0;
 function getPolicyCategoryConsumer(getPolicyCategoryReqTopic, callback) {
-    
-     offset.fetch([{ topic: getPolicyCategoryReqTopic, partition: 0, time: -1 }], function (err, data) {
-        console.log('err: '+err+' data: '+data);
+        
+    offset.fetchLatestOffsets([getPolicyCategoryReqTopic], function (err, data) {
+        console.log('offset fetch err: '+err+' data: '+JSON.stringify(data));
         latestOffset = data[getPolicyCategoryReqTopic]['0'] - 1;
-        console.log("Consumer current offset: " + latestOffset);
         var consumer = new Consumer(client,
             [{ topic: getPolicyCategoryReqTopic, partition: 0, offset: latestOffset }],
             { autoCommit: false, fromOffset: true }
@@ -26,7 +25,6 @@ function getPolicyCategoryConsumer(getPolicyCategoryReqTopic, callback) {
         consumer.on('message', function (message) {                
             var data = JSON.parse(message.value);
             console.log('actual data: '+JSON.stringify(data));
-            //res.json(data);
             consumer.pause();
             callback(null, data);
         });
