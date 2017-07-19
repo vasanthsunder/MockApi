@@ -28,7 +28,7 @@ var reqJson = {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId
+ * Check swagger.yaml for the declaration of operationId getPolicyCategory
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
@@ -58,9 +58,25 @@ function getPolicyCategory(req, res) {
     
 }
 
+
+/**
+ * Check swagger.yaml for the declaration of operationId createPolicyCategory
+ * @param {*} req 
+ * @param {*} res 
+ */
+function createPolicyCategory(req, res) {
+    console.log('createPolicyCategory');
+    var params = req.swagger.params;
+    var policyCategoryObject = req.body;
+    console.log('params: '+JSON.stringify(params));
+    console.log('/*********************************************/');
+    console.log('policyCategoryObject: '+JSON.stringify(policyCategoryObject));
+}
+
 /**
  * Export these functions to use it from other JS
  */
 module.exports = {
-  getPolicyCategory: getPolicyCategory
+  getPolicyCategory: getPolicyCategory,
+  createPolicyCategory: createPolicyCategory
 };

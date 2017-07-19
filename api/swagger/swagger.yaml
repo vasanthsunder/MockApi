@@ -80,6 +80,44 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
+  # Create a policy category in a site
+  /customers/{orgid}/sites/{siteid}/policycategories:
+    x-swagger-router-controller: policy_category
+    post:
+      description: Create a policy category in a site
+      operationId: createPolicyCategory
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: policycategory
+          in: body
+          description: New Policy Category Details
+          required: true
+          schema:
+            $ref: "#/definitions/NewPolicyCategory"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreatePolicyCategoryResponse"
+        "404":
+          description: Policy Category Not Created
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"          
+
   /swagger:
     x-swagger-pipe: swagger_raw
 # complex objects have schema definitions
@@ -90,6 +128,35 @@ definitions:
     properties:
       message:
         type: string
+        
+  NewPolicyCategory: 
+    type: object
+    required:
+      - name
+      - description
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      uid:
+        type: string
+        default: 'null'
+      orgid:
+        type: string
+        default: 'null'
+      siteid:
+        type: string
+        default: 'null'
+      createdon:
+        default: null
+      lastupdated:
+        default: null
+      isdeleted:
+        default: null
+
+  CreatePolicyCategoryResponse:
+    type: object
 
   GetPolicyCategoryResponse:
     type: object    
