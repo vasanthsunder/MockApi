@@ -43,7 +43,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-    # Get a specific policy category
+  # Get a specific policy category
   /customers/{orgid}/sites/{siteid}/policycategories/{policycategoryid}:
     x-swagger-router-controller: policy_category
     get:
