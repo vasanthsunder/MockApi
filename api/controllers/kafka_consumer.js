@@ -4,12 +4,10 @@ var kafka = require('kafka-node');
 var Consumer = kafka.Consumer;
 var Offset = kafka.Offset;
 var Client = kafka.Client;
-var argv = require('optimist').argv;
-//var topic = argv.topic || 'topic1';
 
 var client = new Client('localhost:2181');
 
-/* Print latest offset. */
+//Latest offset
 var offset = new Offset(client);
 let latestOffset = 0;
 function getPolicyCategoryConsumer(getPolicyCategoryReqTopic, callback) {
@@ -20,7 +18,7 @@ function getPolicyCategoryConsumer(getPolicyCategoryReqTopic, callback) {
         var consumer = new Consumer(client,
             [{ topic: getPolicyCategoryReqTopic, partition: 0, offset: latestOffset }],
             { autoCommit: false, fromOffset: true }
-        );
+        );       
         consumer.resume();
         consumer.on('message', function (message) {                
             var data = JSON.parse(message.value);
@@ -28,6 +26,7 @@ function getPolicyCategoryConsumer(getPolicyCategoryReqTopic, callback) {
             consumer.pause();
             callback(null, data);
         });
+        
         consumer.on('error', function (err) {
             console.log('consumer error', err);
         });
