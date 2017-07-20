@@ -39,7 +39,7 @@ producer.on('error', function (err) {
  * @param {*} reqJson -- request JSON
  * @param {*} callback 
  */
-function produceGetPolicyCategoryMessage(reqJson, callback) {
+function producePolicyCategoryMessage(reqJson, callback) {
     var payloads = [
         { topic: config.kafka.requestTopic, messages: JSON.stringify(reqJson), partition: 0 }
     ];
@@ -63,7 +63,7 @@ function produceGetPolicyCategoryMessage(reqJson, callback) {
  * @param {*} messageId - message ID sent in the request
  * @param {*} callback 
  */
-function getPolicyCategoryConsumer(messageId, callback) {        
+function consumePolicyCategoryMessage(messageId, callback) {        
     consumer.resume();
     consumer.on('message', function (message) {    
         //console.log('message: '+JSON.stringify(message));            
@@ -85,6 +85,6 @@ function getPolicyCategoryConsumer(messageId, callback) {
  * Export these functions to use it from controllers
  */
 module.exports = {
-    produceGetPolicyCategoryMessage: produceGetPolicyCategoryMessage,
-    getPolicyCategoryConsumer: getPolicyCategoryConsumer
+    producePolicyCategoryMessage: producePolicyCategoryMessage,
+    consumePolicyCategoryMessage: consumePolicyCategoryMessage
 };
