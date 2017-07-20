@@ -1,5 +1,7 @@
 'use strict';
 
+const uuidv1 = require('uuid/v1');
+
 var kafkaConnector = require('./../dsi/kafka_connector'),
     requestHandler = require('./../models/policy_category.js'),
     response = require('./../helpers/response.js');
@@ -20,17 +22,19 @@ function getPolicyCategory(req, res) {
 
     console.log('orgId:' + orgId + ' siteId:' + siteId + ' policyCategoryId:' + policyCategoryId);
 
-    // var messageId = reqJson.messageid;
+    // for unique messages we can overide the message id here
+    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
+    console.log('messageId getPolicyCategory: '+messageId);
     //Construct the payload that has to be sent to Kafka
-    var payLoad = requestHandler.getRequestHandle();
-    var messageId = payLoad.messageid; // for unique messages we can overide the message id here
+    var payLoad = requestHandler.getRequestHandle();    
+    payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.policycategory.uid = policyCategoryId;
 
     //Send the message to Kafka. 
     kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
-        console.log('err: ' + err + ' message: ' + msg);
+        console.log('producePolicyCategoryMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
                 response.Done(err, msg, res, req);

@@ -12,7 +12,8 @@
     "cors": "^2.8.4",
     "express": "^4.12.3",
     "kafka-node": "^2.0.1",
-    "swagger-express-mw": "^0.1.0"
+    "swagger-express-mw": "^0.1.0",
+    "uuid": "^3.1.0"
   },
   "devDependencies": {
     "should": "^7.1.0",
