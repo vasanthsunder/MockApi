@@ -18,9 +18,35 @@ consumes:
 produces:
   - application/json
 paths:
-  # Get a specific policy category
+  /hello:
+    # binds a127 app logic to a route
+    x-swagger-router-controller: hello_world
+    get:
+      description: Returns 'Hello' to the caller
+      # used as the method name of the controller
+      operationId: hello
+      parameters:
+        - name: name
+          in: query
+          description: The name of the person to whom to say hello
+          required: false
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/HelloWorldResponse"
+        # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  # Get, Update, Delete  a specific policy category
   /customers/{orgid}/sites/{siteid}/policycategories/{policycategoryid}:
     x-swagger-router-controller: policy_category
+    # Get a policy category
     get:
       description: Get a specific policy category in a site
       operationId: getPolicyCategory
@@ -55,9 +81,75 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-  # Create a policy category in a site
+    # Delete a policy category
+    delete:
+      description: Delete a policy category in a ite
+      operationId: deletePolicyCategory
+      parameters:
+        - name: orgid
+          in: path
+          description: The customer ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: policycategoryid
+          in: path
+          description: The policy category ID
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Success
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    
+    # Update a policy category
+    post:
+      description: Update a policy category
+      operationId: updatePolicyCategory
+      parameters:
+        - name: orgid
+          in: path
+          description: The customer ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: policycategoryid
+          in: path
+          description: The policy category ID
+          required: true
+          type: string
+        - name: policycategory
+          in: body
+          description: Updated a policy category
+          required: true
+          schema:
+            $ref: "#/definitions/NewPolicyCategory"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UpdatePolicyCategoryResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+  # Create, get all Policy category in a site
   /customers/{orgid}/sites/{siteid}/policycategories:
     x-swagger-router-controller: policy_category
+
+    # Create a policy category
     post:
       description: Create a policy category in a site
       operationId: createPolicyCategory
@@ -92,9 +184,39 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"          
-
+    
+    # Get all policy categories
+    get:
+      description: Get all policy categories in a site
+      operationId: getAllPolicyCategories
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string              
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetAllPolicyCategoriesResponse"
+        "404":
+          description: Policy Categories Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"    
   /swagger:
-    x-swagger-pipe: swagger_raw
+    x-swagger-pipe: swagger_raw    
+  
 # complex objects have schema definitions
 definitions:
   HelloWorldResponse:
@@ -135,6 +257,12 @@ definitions:
 
   GetPolicyCategoryResponse:
     type: object    
+  
+  GetAllPolicyCategoriesResponse:
+    type: object
+  
+  UpdatePolicyCategoryResponse:
+    type: object
 
   ErrorResponse:
     required:

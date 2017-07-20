@@ -80,9 +80,60 @@ function createPolicyCategory(req, res) {
 }
 
 /**
+ * Check swagger.yaml for the declaration of operationId getAllPolicyCategories
+ * @param {*} req 
+ * @param {*} res 
+ */
+function getAllPolicyCategories(req, res) {
+    console.log('getAllPolicyCategories');
+    var params = req.swagger.params;
+    var orgId = params.orgid.value;
+    var siteId = params.siteid.value;
+    console.log('orgId:'+orgId+' siteId:'+siteId);
+}
+
+/**
+ * Check swagger.yaml for the declaration of operationId deletePolicyCategory
+ * @param {*} req 
+ * @param {*} res 
+ */
+function deletePolicyCategory(req, res) {
+    console.log('deletePolicyCategory');
+    var params = req.swagger.params;
+    var orgId = params.orgid.value;
+    var siteId = params.siteid.value;
+    var policyCategoryId = params.policycategoryid.value;
+
+    console.log('orgId:'+orgId+' siteId:'+siteId+' policyCategoryId:'+policyCategoryId);
+
+}
+
+/**
+ * Check swagger.yaml for the declaration of operationId updatePolicyCategory
+ * @param {*} req 
+ * @param {*} res 
+ */
+function updatePolicyCategory(req, res) {
+    console.log('updatePolicyCategory');
+    var params = req.swagger.params;
+    var orgId = params.orgid.value;
+    var siteId = params.siteid.value;
+    var policyCategoryId = params.policycategoryid.value;
+
+    console.log('orgId:'+orgId+' siteId:'+siteId+' policyCategoryId:'+policyCategoryId);
+
+    var policyCategoryObject = req.body;
+    console.log('params: '+JSON.stringify(params));
+    console.log('/*********************************************/');
+    console.log('policyCategoryObject: '+JSON.stringify(policyCategoryObject));
+}
+/**
  * Export these functions to use it from other JS
  */
 module.exports = {
     getPolicyCategory: getPolicyCategory,
-    createPolicyCategory: createPolicyCategory
+    createPolicyCategory: createPolicyCategory,
+    getAllPolicyCategories: getAllPolicyCategories,
+    deletePolicyCategory: deletePolicyCategory,
+    updatePolicyCategory: updatePolicyCategory
 };
