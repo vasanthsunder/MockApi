@@ -21,7 +21,8 @@ var producerReady = false;
 producer.on('ready', function () {
     producerReady = true;    
     // Create topics async
-    producer.createTopics([config.kafka.requestTopic], function (err, data) {
+    // producer.createTopics([config.kafka.requestTopic, config.kafka.responseTopic], function (err, data) {
+            producer.createTopics([config.kafka.requestTopic], function (err, data) {
         consumer = new Consumer(client, config.kafka.consumerPayload, config.kafka.consumerOptions);  
         //Adding this to make sure the consumer.on('message') is called
         consumer.pause();
