@@ -5,6 +5,7 @@ const uuidv1 = require('uuid/v1');
 var kafkaConnector = require('./../dsi/kafka_connector'),
     requestHandler = require('./../models/policy_category.js'),
     response = require('./../helpers/response.js');
+var errorResponseHandle = requestHandler.errorResponseHandle();
 
 //TODO - remove this when intergrated with actual Kafka
 
@@ -37,10 +38,16 @@ function getPolicyCategory(req, res) {
         console.log('producePolicyCategoryMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg, res, req);
+                if (!err) {
+                    var payLoad = requestHandler.getResponseHandle();
+                    response.Done(err, payLoad.response.result, res, req);
+                }
+                else {
+                    response.Done(err, errorResponseHandle.response, res, req);
+                }
             });
         } else {
-            response.Done(err, msg, res, req);
+            response.Done(err, res, res, req);
         }
     });
 
@@ -76,7 +83,12 @@ function createPolicyCategory(req, res) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg, res, req);
+                if (!err) {
+                    var payLoad = requestHandler.getResponseHandle();
+                    response.Done(err, payLoad.response.result, res, req);
+                } else {
+                    response.Done(err, errorResponseHandle.response, res, req);
+                }
             });
         } else {
             response.Done(err, msg, res, req);
@@ -106,7 +118,12 @@ function getAllPolicyCategories(req, res) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg, res, req);
+                if (!err) {
+                    var payLoad = requestHandler.getAllResponseHandle();
+                    response.Done(err, payLoad.response.result, res, req);
+                } else {
+                    response.Done(err, errorResponseHandle.response, res, req);
+                }
             });
         } else {
             response.Done(err, msg, res, req);
@@ -141,9 +158,18 @@ function deletePolicyCategory(req, res) {
     //Send the message to Kafka. 
     kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
         console.log('producePolicyCategoryMessage err: ' + err + ' message: ' + msg);
+        var payLoad = requestHandler.deleteResponseHandle();
+        console.log("payload meeesage", payLoad);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg, res, req);
+                if (!err) {
+                    var payLoad = requestHandler.deleteResponseHandle();
+                    console.log("payload meeesage @@@@", msg);
+                    response.Done(err, payLoad.response.result, res, req);
+                } else {
+                    response.Done(err, errorResponseHandle.response, res, req);
+                }
+
             });
         } else {
             response.Done(err, msg, res, req);
@@ -181,7 +207,13 @@ function updatePolicyCategory(req, res) {
         console.log('producePolicyCategoryMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg, res, req);
+                if (!err) {
+                    var payLoad = requestHandler.getResponseHandle();
+                    response.Done(err, payLoad.response.result, res, req);
+                } else {
+                    response.Done(err, errorResponseHandle.response, res, req);
+                }
+
             });
         } else {
             response.Done(err, msg, res, req);

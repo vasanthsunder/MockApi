@@ -4,7 +4,11 @@ module.exports = {
     postRequestHandle: postRequestHandle,
     getAllRequestHandle: getAllRequestHandle,
     deleteRequestHandle: deleteRequestHandle,
-    updateRequestHandle: updateRequestHandle
+    updateRequestHandle: updateRequestHandle,
+    getResponseHandle: getResponseHandle,
+    getAllResponseHandle: getAllResponseHandle,
+    deleteResponseHandle: deleteResponseHandle,
+    errorResponseHandle: errorResponseHandle
 };
 
 /**
@@ -167,4 +171,86 @@ function updateRequestHandle() {
         }
     };
     return updateRequestHandle
+}
+
+/**
+ * Returns the getRequestHandle for the policy_category 
+ * intialise them with some dummy values
+ * These can be overidden with in each specific request
+ */
+function getResponseHandle() {
+    var getResponseHandle = {
+        "messageid": "1c6c5c9c-970b-43f9-8b93-fdacc162faeb",
+        "response": {
+            "requestid": "ed7fbfb8-cbcc-4cbd-87b6-c7bea4008814",
+            "timestamp": "2017-07-12T02:24:19.172Z",
+            "success": true,
+            "result": {
+                "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
+                "name": "name",
+                "description": "desc",
+                "orgid": "d8547b37-95ba-410d-9382-0b190d951332",
+                "siteid": "d8547b37-95ba-410d-9382-0b190d951332",
+                "createdon": 1499826169162,
+                "lastupdated": 1499826169162,
+                "isdeleted": false
+            }
+        }
+    };
+    return getResponseHandle;
+}
+
+
+
+function getAllResponseHandle() {
+    var getAllResponseHandle = {
+        "messageid": "1c6c5c9c-970b-43f9-8b93-fdacc162faeb",
+        "response": {
+            "requestid": "ed7fbfb8-cbcc-4cbd-87b6-c7bea4008814",
+            "timestamp": "2017-07-12T02:24:21.143Z",
+            "success": true,
+            "result": [
+                {
+                    "uid": "ab0c4013-4241-4f78-92f5-d8b43245bd87",
+                    "name": "name",
+                    "description": "desc",
+                    "orgid": "d8547b37-95ba-410d-9382-0b190d951332",
+                    "siteid": "d8547b37-95ba-410d-9382-0b190d951332",
+                    "createdon": 1499826257136,
+                    "lastupdated": 1499826257136,
+                    "isdeleted": false
+                }
+            ]
+        }
+    };
+    return getAllResponseHandle;
+}
+
+function deleteResponseHandle() {
+    var deleteResponseHandle = {
+        "messageid": "1c6c5c9c-970b-43f9-8b93-fdacc162faeb",
+        "response": {
+            "requestid": "ed7fbfb8-cbcc-4cbd-87b6-c7bea4008814",
+            "timestamp": "2017-07-12T02:24:25.156Z",
+            "success": true,
+            "result": {
+                "success": true
+            }
+        }
+    };
+    return deleteResponseHandle;
+}
+
+function errorResponseHandle() {
+    var errorResponseHandle = {
+        "messageid": "da4067d5-7532-40d1-8763-9f19f02d4f9e",
+        "response": {
+            "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
+            "timestamp": "2017-07-12T02:33:23.505Z",
+            "success": false,
+            "error": "Policy category not found with that id",
+            "status": 500
+        }
+    };
+    return errorResponseHandle
 }

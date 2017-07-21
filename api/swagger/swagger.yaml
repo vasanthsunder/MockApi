@@ -104,6 +104,8 @@ paths:
       responses:
         "204":
           description: Success
+          schema:
+            $ref: "#/definitions/GetPolicyCategoryResponse"
         default:
           description: Error
           schema:

@@ -9,9 +9,10 @@ var kafka = require('kafka-node');
 var Producer = kafka.Producer;
 var Consumer = kafka.Consumer;
 var Client = kafka.Client;
-var client = new Client('localhost:2181');
+
 
 var config = require('./../../config/main.conf');
+var client = new Client(config.kafka.clientUrl);
 
 var producer = new Producer(client, config.kafka.producerOptions);
 var consumer;
