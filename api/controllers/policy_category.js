@@ -39,11 +39,11 @@ function getPolicyCategory(req, res) {
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
                 if (!err) {
-                    var payLoad = requestHandler.getResponseHandle();
-                    response.Done(err, payLoad.response.result, res, req);
+                    var msg = requestHandler.getResponseHandle();
+                    response.Done(err, msg.response.result, res, req);
                 }
                 else {
-                    response.Done(err, errorResponseHandle.response, res, req);
+                    response.Done(err, msg.response, res, req);
                 }
             });
         } else {
@@ -84,10 +84,10 @@ function createPolicyCategory(req, res) {
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
                 if (!err) {
-                    var payLoad = requestHandler.getResponseHandle();
-                    response.Done(err, payLoad.response.result, res, req);
+                    var msg = requestHandler.getResponseHandle();
+                    response.Done(err, msg.response.result, res, req);
                 } else {
-                    response.Done(err, errorResponseHandle.response, res, req);
+                    response.Done(err, msg.response, res, req);
                 }
             });
         } else {
@@ -119,10 +119,10 @@ function getAllPolicyCategories(req, res) {
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
                 if (!err) {
-                    var payLoad = requestHandler.getAllResponseHandle();
-                    response.Done(err, payLoad.response.result, res, req);
+                    var msg = requestHandler.getAllResponseHandle();
+                    response.Done(err, msg.response.result, res, req);
                 } else {
-                    response.Done(err, errorResponseHandle.response, res, req);
+                    response.Done(err, msg.response, res, req);
                 }
             });
         } else {
@@ -163,11 +163,10 @@ function deletePolicyCategory(req, res) {
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
                 if (!err) {
-                    var payLoad = requestHandler.deleteResponseHandle();
-                    console.log("payload meeesage @@@@", msg);
-                    response.Done(err, payLoad.response.result, res, req);
+                    var msg = requestHandler.deleteResponseHandle();
+                    response.Done(err, msg.response.result, res, req);
                 } else {
-                    response.Done(err, errorResponseHandle.response, res, req);
+                    response.Done(err, msg.response, res, req);
                 }
 
             });
@@ -208,10 +207,10 @@ function updatePolicyCategory(req, res) {
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
                 if (!err) {
-                    var payLoad = requestHandler.getResponseHandle();
-                    response.Done(err, payLoad.response.result, res, req);
+                    var msg = requestHandler.getResponseHandle();
+                    response.Done(err, msg.response.result, res, req);
                 } else {
-                    response.Done(err, errorResponseHandle.response, res, req);
+                    response.Done(err, msg.response, res, req);
                 }
 
             });
