@@ -37,14 +37,14 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
 
   // install middleware
   swaggerExpress.register(app);
-
    // Error handler
   app.use(function (err, req, res, next) {
       global.log.error(err.message, err.stack);
       switch (err.code) {
           case 'SCHEMA_VALIDATION_FAILED':
               global.log.error('Swagger validation error(s)', JSON.stringify(err));
-              res.status(400).send({error: true, message: err.message});
+              //res.status(400).send({error: true, message: err.message});
+              res.status(400).send({error:true, errors: err.results.errors, message: 'Bad Request'});
               break;
           case 'ETIMEDOUT':
               global.log.error('Response timeout error(s)', JSON.stringify(err));
