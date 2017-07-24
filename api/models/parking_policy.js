@@ -4,7 +4,7 @@ module.exports = {
     postRequestHandle: postRequestHandle,
     getAllRequestHandle: getAllRequestHandle,
     deleteRequestHandle: deleteRequestHandle,
-    updateRequestHandle: updateRequestHandle,
+    updateRequestHandle: updateRequestHandle
 };
 
 /**

@@ -98,7 +98,6 @@ function getAllParkingPolicy(req, res) {
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    // payLoad.request.configprops.uid = ParkingPolicyId;
     //Send the message to Kafka. 
     kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);

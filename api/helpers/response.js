@@ -18,17 +18,17 @@ function Done(err, data, res, req){
             global.log.error("Request %s timedout", req.originalUrl);
         } else if(!err && data) {
             global.log.info("Success" /*, (data?JSON.stringify(data):'')*/);
-            if(data && data.success && data.success==true){
+            if(data && data.success && data.success==true && data.result){
                 res.setHeader('Content-Type', 'application/json');
-                res.status(200).json(data);
+
+                //Check for empty result object
+                if(data.result.length == 0){
+                    res.status(204);
+                } else {
+                    res.status(200).json(data.result);
+                }
             }
-            else if(!err && data && (data.result instanceof Array) && data.success==true) {
-                // Send success with whatever data is returned - empty array is still valid data
-                res.status(200).json(data);
-            } else if(!data || data.succes==true || !(Object.keys(data.result)) || !(Object.keys(data.result).length)) {
-                // Send success with whatever data is returned - empty array is still valid data
-                res.status(204);//.json({});
-            } else if(data && data.success && data.success==false){
+            else if(data && data.succes && data.success==false){
                 res.setHeader('Content-Type', 'application/json');
                 res.status(data.status).json(data);
             }
@@ -55,6 +55,7 @@ function Done(err, data, res, req){
         res.end();
 
     } catch(err){
+        console.log('err: '+err);
         global.log.error(JSON.stringify(err));
     }
 

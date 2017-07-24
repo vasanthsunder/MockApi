@@ -14,13 +14,13 @@ var cors_options = {
     "origin": true,
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
-    "credentials": true,
+    "credentials": true
     //"allowedHeaders": "X-Requested-With"
 }
 app.use(cors(cors_options));
 
 var timeout = require('connect-timeout');
-app.use(timeout('20s')); // Should be less than haproxy server timeout
+app.use(timeout('10s')); // Should be less than haproxy server timeout
 var onTimedout = function (req, res, next) {
     if (req.timedout)
         global.log.info('Request has timed out.');

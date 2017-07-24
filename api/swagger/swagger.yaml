@@ -206,8 +206,10 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetAllPolicyCategoriesResponse"
+            type: array
+            items: 
+              # a pointer to a definition
+              $ref: "#/definitions/GetAllPolicyCategoriesResponse"
         "404":
           description: Policy Categories Not Found
           schema:
@@ -380,8 +382,10 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetAllParkingPoliciesResponse"
+            type: array
+            items: 
+              # a pointer to a definition
+              $ref: "#/definitions/GetAllParkingPoliciesResponse"
         "404":
           description: Parking Policy Not Found
           schema:
