@@ -102,10 +102,10 @@ paths:
           required: true
           type: string
       responses:
-        "204":
+        "200":
           description: Success
           schema:
-            $ref: "#/definitions/GetPolicyCategoryResponse"
+            $ref: "#/definitions/DeletePolicyCategoryResponse"
         default:
           description: Error
           schema:
@@ -278,10 +278,10 @@ paths:
           required: true
           type: string
       responses:
-        "204":
+        "200":
           description: Success
           schema:
-            $ref: "#/definitions/GetParkingPolicyResponse"
+            $ref: "#/definitions/DeleteParkingPolicyResponse"
         default:
           description: Error
           schema:
@@ -323,7 +323,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-   # Create, get all parking Policy in a site
+   # Create, get all parking policy in a site
   /customers/{orgid}/sites/{siteid}/parkingpolicies:
     x-swagger-router-controller: parking_policy
 
@@ -410,7 +410,6 @@ definitions:
     type: object
     required:
       - name
-      - description
     properties:
       name:
         type: string
@@ -447,6 +446,9 @@ definitions:
   UpdatePolicyCategoryResponse:
     type: object
 
+  DeletePolicyCategoryResponse:
+    type: object
+
   GetParkingPolicyResponse:
     type: object
 
@@ -457,6 +459,9 @@ definitions:
     type: object
 
   GetAllParkingPoliciesResponse:
+    type: object
+  
+  DeleteParkingPolicyResponse:
     type: object
 
   ErrorResponse:

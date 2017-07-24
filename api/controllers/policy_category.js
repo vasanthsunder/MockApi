@@ -172,7 +172,7 @@ function updatePolicyCategory(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = policycategoryid;
+    payLoad.request.configprops.uid = policyCategoryId;
     payLoad.request.configprops.policycategory = policyCategoryObject;
 
     //Send the message to Kafka. 

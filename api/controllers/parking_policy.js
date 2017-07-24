@@ -73,7 +73,7 @@ function createParkingPolicy(req, res) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response.result, res, req);
+                response.Done(err, msg.response, res, req);
             });
         } else {
             response.Done(err, msg, res, req);
@@ -103,7 +103,7 @@ function getAllParkingPolicy(req, res) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response.result, res, req);
+                response.Done(err, msg.response, res, req);
             });
         } else {
             response.Done(err, msg, res, req);
@@ -141,7 +141,7 @@ function deleteParkingPolicy(req, res) {
         console.log("payload meeesage", payLoad);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response.result, res, req);
+                response.Done(err, msg.response, res, req);
             });
         } else {
             response.Done(err, msg, res, req);
@@ -159,10 +159,10 @@ function updateParkingPolicy(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var ParkingPolicyId = params.parkingpolicyid.value;
+    var parkingPolicyId = params.parkingpolicyid.value;
     var ParkingPolicyObject = req.body;
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' ParkingPolicyId:' + ParkingPolicyId);
+    console.log('orgId:' + orgId + ' siteId:' + siteId + ' ParkingPolicyId:' + parkingPolicyId);
 
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
@@ -172,7 +172,7 @@ function updateParkingPolicy(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = parkingpolicyid;
+    payLoad.request.configprops.uid = parkingPolicyId;
     payLoad.request.configprops.policy = ParkingPolicyObject;
 
     //Send the message to Kafka. 
@@ -180,7 +180,7 @@ function updateParkingPolicy(req, res) {
         console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response.result, res, req);
+                response.Done(err, msg.response, res, req);
             });
         } else {
             response.Done(err, msg, res, req);

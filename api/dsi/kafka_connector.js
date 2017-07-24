@@ -60,18 +60,15 @@ function producePolicyCategoryMessage(reqJson, callback) {
  * @param {*} callback 
  */
 function consumePolicyCategoryMessage(messageId, callback) {
-        consumer.on('message', function (message) {           
-            var data = JSON.parse(message.value);
-            console.log('messageId: ' + messageId);
-            console.log('data.messageid: ' + data.messageid);
-            if (data.messageid == messageId) {
-                console.log('actual data: ' + JSON.stringify(data));
-                callback(null, data);
-            }
-        });
-        consumer.on('error', function (err) {
-            callback(err);
-        });
+    consumer.on('message', function (message) {           
+        var data = JSON.parse(message.value);
+        console.log('messageId: ' + messageId);
+        console.log('data.messageid: ' + data.messageid);
+        if (data.messageid == messageId) {
+            console.log('actual data: ' + JSON.stringify(data));
+            callback(null, data);
+        }
+    });
     consumer.on('error', function (err) {
         callback(err);
     });
