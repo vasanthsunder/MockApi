@@ -307,7 +307,7 @@ paths:
           description: The parking policy ID
           required: true
           type: string
-        - name: parkingpolicy
+        - name: policy
           in: body
           description: Updated a parking policy
           required: true
@@ -323,7 +323,7 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-   # Create, get all Policy category in a site
+   # Create, get all parking Policy in a site
   /customers/{orgid}/sites/{siteid}/parkingpolicies:
     x-swagger-router-controller: parking_policy
 
@@ -342,7 +342,7 @@ paths:
           description: The site ID
           required: true
           type: string
-        - name: parkingpolicy
+        - name: policy
           in: body
           description: New Parking Policy Details
           required: true
