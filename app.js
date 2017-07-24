@@ -10,7 +10,7 @@ var config = {
 };
 
 var cors_options = {
-    //"origin": "http://localhost:8080",
+    // "origin": "http://localhost:8080",
     "origin": true,
     "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
     "preflightContinue": false,
@@ -20,7 +20,7 @@ var cors_options = {
 app.use(cors(cors_options));
 
 var timeout = require('connect-timeout');
-app.use(timeout('10s')); // Should be less than haproxy server timeout
+app.use(timeout('20s')); // Should be less than haproxy server timeout
 var onTimedout = function (req, res, next) {
     if (req.timedout)
         global.log.info('Request has timed out.');
@@ -43,7 +43,6 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
       switch (err.code) {
           case 'SCHEMA_VALIDATION_FAILED':
               global.log.error('Swagger validation error(s)', JSON.stringify(err));
-              //res.status(400).send({error: true, message: err.message});
               res.status(400).send({error:true, errors: err.results.errors, message: 'Bad Request'});
               break;
           case 'ETIMEDOUT':

@@ -3,7 +3,7 @@ info:
   version: "0.0.1"
   title: Sensity Interface Service
 # during dev, should point to your local machine
-host: localhost:10010
+host: 0.0.0.0:10010
 # basePath prefixes all resource paths 
 basePath: /
 # 
@@ -83,7 +83,7 @@ paths:
 
     # Delete a policy category
     delete:
-      description: Delete a policy category in a ite
+      description: Delete a policy category in a site
       operationId: deletePolicyCategory
       parameters:
         - name: orgid
@@ -215,7 +215,181 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"    
+            $ref: "#/definitions/ErrorResponse"  
+
+   # Get, Update, Delete  a specific parking policy
+  /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}:
+    x-swagger-router-controller: parking_policy
+    # Get a parking policy 
+    get:
+      description: Get a specific parking policy in a site
+      operationId: getParkingPolicy
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The parking policy ID
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetParkingPolicyResponse"
+        "404":
+          description: Parking Policy Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+
+    # Delete a policy category
+    delete:
+      description: Delete a parking policy in a site
+      operationId: deleteParkingPolicy
+      parameters:
+        - name: orgid
+          in: path
+          description: The customer ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The parking policy ID
+          required: true
+          type: string
+      responses:
+        "204":
+          description: Success
+          schema:
+            $ref: "#/definitions/GetParkingPolicyResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+
+    # Update a parking policy
+    post:
+      description: Update a parking policy
+      operationId: updateParkingPolicy
+      parameters:
+        - name: orgid
+          in: path
+          description: The customer ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The parking policy ID
+          required: true
+          type: string
+        - name: parkingpolicy
+          in: body
+          description: Updated a parking policy
+          required: true
+          schema:
+            $ref: "#/definitions/NewParkingPolicy"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/UpdateParkingPolicyResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+   # Create, get all Policy category in a site
+  /customers/{orgid}/sites/{siteid}/parkingpolicies:
+    x-swagger-router-controller: parking_policy
+
+    # Create a parking policy
+    post:
+      description: Create a parking policy in a site
+      operationId: createParkingPolicy
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicy
+          in: body
+          description: New Parking Policy Details
+          required: true
+          schema:
+            $ref: "#/definitions/NewParkingPolicy"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/CreateParkingPolicyResponse"
+        "404":
+          description: Policy Category Not Created
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    # Get all policy categories
+    get:
+      description: Get all parking policies in a site
+      operationId: getAllParkingPolicy
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string              
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetAllParkingPoliciesResponse"
+        "404":
+          description: Parking Policy Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
   /swagger:
     x-swagger-pipe: swagger_raw    
   
@@ -254,6 +428,9 @@ definitions:
       isdeleted:
         default: null
 
+  NewParkingPolicy: 
+    type: object
+ 
   CreatePolicyCategoryResponse:
     type: object
 
@@ -264,6 +441,18 @@ definitions:
     type: object
   
   UpdatePolicyCategoryResponse:
+    type: object
+
+  GetParkingPolicyResponse:
+    type: object
+
+  CreateParkingPolicyResponse:
+    type: object
+
+  UpdateParkingPolicyResponse:
+    type: object
+
+  GetAllParkingPoliciesResponse:
     type: object
 
   ErrorResponse:

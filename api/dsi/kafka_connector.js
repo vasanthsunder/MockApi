@@ -9,30 +9,25 @@ var kafka = require('kafka-node');
 var Producer = kafka.Producer;
 var Consumer = kafka.Consumer;
 var Client = kafka.Client;
-
-
 var config = require('./../../config/main.conf');
-var client = new Client(config.kafka.clientUrl);
-
+var kafkaClientHost = process.env.kafka_client_host || 'localhost';
+var kafkaClientPort = process.env.kafka_client_port || 2181;
+var client = new Client(kafkaClientHost + ':' + kafkaClientPort);
 var producer = new Producer(client, config.kafka.producerOptions);
 var consumer;
-
 var producerReady = false;
 
 producer.on('ready', function () {
-    producerReady = true;    
+    producerReady = true;
     // Create topics async
-    // producer.createTopics([config.kafka.requestTopic, config.kafka.responseTopic], function (err, data) {
-            producer.createTopics([config.kafka.requestTopic], function (err, data) {
-        consumer = new Consumer(client, config.kafka.consumerPayload, config.kafka.consumerOptions);  
-        //Adding this to make sure the consumer.on('message') is called
-        consumer.pause();
-        console.log('Topics created: '+data);
+    producer.createTopics([config.kafka.requestTopic, config.kafka.responseTopic], function (err, data) {
+        consumer = new Consumer(client, config.kafka.consumerPayload, config.kafka.consumerOptions);
+        console.log('Topics created: ' + data);
     });
 });
 
 producer.on('error', function (err) {
-  console.log('producer error', err);
+    console.log('producer error', err);
 });
 
 /**
@@ -45,13 +40,12 @@ function producePolicyCategoryMessage(reqJson, callback) {
     var payloads = [
         { topic: config.kafka.requestTopic, messages: JSON.stringify(reqJson), partition: 0 }
     ];
-    if(producerReady) {    
+    if (producerReady) {
         producer.send(payloads, function (err, data) {
-            //data -- {<topicname>:{"0":<offset>}}
-            if(err){
+            if (err) {
                 callback(err)
             } else {
-                callback(null, data);                
+                callback(null, data);
             }
         });
     } else {
@@ -65,20 +59,20 @@ function producePolicyCategoryMessage(reqJson, callback) {
  * @param {*} messageId - message ID sent in the request
  * @param {*} callback 
  */
-function consumePolicyCategoryMessage(messageId, callback) {        
-    consumer.resume();
-    consumer.on('message', function (message) {    
-        //console.log('message: '+JSON.stringify(message));            
-        var data = JSON.parse(message.value);
-        console.log('messageId: '+messageId);
-        console.log('data.messageid: '+data.messageid);
-        if(data.messageid == messageId) {
-            console.log('actual data: '+JSON.stringify(data));
-            callback(null, data);
-        }
-        consumer.pause();        
-    });
-    consumer.on('error', function(err){
+function consumePolicyCategoryMessage(messageId, callback) {
+        consumer.on('message', function (message) {           
+            var data = JSON.parse(message.value);
+            console.log('messageId: ' + messageId);
+            console.log('data.messageid: ' + data.messageid);
+            if (data.messageid == messageId) {
+                console.log('actual data: ' + JSON.stringify(data));
+                callback(null, data);
+            }
+        });
+        consumer.on('error', function (err) {
+            callback(err);
+        });
+    consumer.on('error', function (err) {
         callback(err);
     });
 }

@@ -18,17 +18,21 @@ function Done(err, data, res, req){
             global.log.error("Request %s timedout", req.originalUrl);
         } else if(!err && data) {
             global.log.info("Success" /*, (data?JSON.stringify(data):'')*/);
-            if(data && data.status && data.status!=204){
+            if(data && data.success && data.success==true){
+                res.setHeader('Content-Type', 'application/json');
+                res.status(200).json(data);
+            }
+            else if(!err && data && (data.result instanceof Array) && data.success==true) {
+                // Send success with whatever data is returned - empty array is still valid data
+                res.status(200).json(data);
+            } else if(!data || data.succes==true || !(Object.keys(data.result)) || !(Object.keys(data.result).length)) {
+                // Send success with whatever data is returned - empty array is still valid data
+                res.status(204);//.json({});
+            } else if(data && data.success && data.success==false){
                 res.setHeader('Content-Type', 'application/json');
                 res.status(data.status).json(data);
             }
-            else if(!err && data && (data instanceof Array) ) {
-                // Send success with whatever data is returned - empty array is still valid data
-                res.status(200).json(data);
-            } else if(!data || data.status==204 || !(Object.keys(data)) || !(Object.keys(data).length)) {
-                // Send success with whatever data is returned - empty array is still valid data
-                res.status(204);//.json({});
-            } else {
+            else {
                 res.setHeader('Content-Type', 'application/json');
                 res.status(200).json(data);
             }
