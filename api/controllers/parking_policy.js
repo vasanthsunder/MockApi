@@ -172,6 +172,7 @@ function updateParkingPolicy(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
+    payLoad.request.configprops.uid = parkingpolicyid;
     payLoad.request.configprops.policy = ParkingPolicyObject;
 
     //Send the message to Kafka. 
