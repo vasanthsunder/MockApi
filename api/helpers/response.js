@@ -17,7 +17,6 @@ function Done(err, data, res, req){
             // TODO: Recover from timeout
             global.log.error("Request %s timedout", req.originalUrl);
         } else if(!err && data) {
-            global.log.info("Success12" /*, (data?JSON.stringify(data):'')*/);
             if(data && data.success && data.success==true && data.result){
                 res.setHeader('Content-Type', 'application/json');
 
@@ -37,7 +36,6 @@ function Done(err, data, res, req){
                 res.status(200).json(data);
             }
         } else if(!err && !data) {
-            global.log.info("Success12312" /*, (data?JSON.stringify(data):'')*/);
             // Send success with whatever data is returned - empty array is still valid data
             //res.setHeader('Content-Type', 'application/json');
             res.status(204);//.json({});
