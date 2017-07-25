@@ -19,13 +19,8 @@ function Done(err, data, res, req){
         } else if(!err && data) {
             if(data && data.success==true && data.result){
                 res.setHeader('Content-Type', 'application/json');
-                //Check for empty result object
-                if(data.result.length == 0){
-                    res.status(204).json(data.result);
-                } else {
                     res.status(200).json(data.result);
                 }
-            }
             else if(data && data.success==false){
                 res.setHeader('Content-Type', 'application/json');
                 var errorResponse = {"error": data.error};
