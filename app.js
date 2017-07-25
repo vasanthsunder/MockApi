@@ -43,17 +43,27 @@ SwaggerExpress.create(config, function(err, swaggerExpress) {
       switch (err.code) {
           case 'SCHEMA_VALIDATION_FAILED':
               global.log.error('Swagger validation error(s)', JSON.stringify(err));
-              res.status(400).send({error:true, errors: err.results.errors, message: 'Bad Request'});
+              var errorJson = {"error": []};
+              if (err.results.errors) {
+                if(err.results.errors.length == 1) { //If the error is only one, then create json object, else json array
+                    errorJson = {"error": err.results.errors[0].message};
+                } else {
+                    for (var i in  err.results.errors) {
+                        errorJson.error.push(err.results.errors[i].message);                
+                    }
+                }
+              }
+              res.status(400).send(errorJson);
               break;
           case 'ETIMEDOUT':
               global.log.error('Response timeout error(s)', JSON.stringify(err));
-              res.status(408).send({error: true, message: err.message});
+              res.status(408).send({error: err.message});
               break;
           default:
               if (err.message.indexOf('defined in Swagger') !== -1)
-                  res.status(400).send({error: true, message: err.message});
+                  res.status(400).send({error: err.message});
               else
-                  res.status(500).send({error: true, message: err.message});
+                  res.status(500).send({error: err.message});
       }
   });
   var server;

@@ -17,9 +17,8 @@ function Done(err, data, res, req){
             // TODO: Recover from timeout
             global.log.error("Request %s timedout", req.originalUrl);
         } else if(!err && data) {
-            if(data && data.success && data.success==true && data.result){
+            if(data && data.success==true && data.result){
                 res.setHeader('Content-Type', 'application/json');
-
                 //Check for empty result object
                 if(data.result.length == 0){
                     res.status(204).json(data.result);
@@ -27,9 +26,10 @@ function Done(err, data, res, req){
                     res.status(200).json(data.result);
                 }
             }
-            else if(data && data.succes && data.success==false){
+            else if(data && data.success==false){
                 res.setHeader('Content-Type', 'application/json');
-                res.status(data.status).json(data);
+                var errorResponse = {"error": data.error};
+                res.status(data.status).json(errorResponse);
             }
             else {
                 res.setHeader('Content-Type', 'application/json');
