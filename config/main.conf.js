@@ -10,4 +10,3 @@ config.kafka = {
 }
 
 module.exports = config;
-

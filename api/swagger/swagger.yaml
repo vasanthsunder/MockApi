@@ -433,7 +433,15 @@ definitions:
 
   NewParkingPolicy: 
     type: object
- 
+    required:
+      - name
+      - policyAuthorizerid
+    properties:
+      name:
+        type: string
+      policyAuthorizerid:
+        type: string  
+
   CreatePolicyCategoryResponse:
     type: object
 
