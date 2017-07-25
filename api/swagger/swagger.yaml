@@ -410,7 +410,6 @@ definitions:
     type: object
     required:
       - name
-      - description
     properties:
       name:
         type: string
