@@ -394,6 +394,86 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"  
+
+    # Group-Policy Assocation in a site
+  /customers/{orgid}/sites/{siteid}/policyassociation:
+    x-swagger-router-controller: group_policy
+
+    # Associate a group-policy
+    post:
+      description: Associate a group-policy in a site
+      operationId: policyassociation
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: grouppolicy
+          in: body
+          description: Associating Group Policy Details
+          required: true
+          schema:
+            $ref: "#/definitions/GroupPolicy"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/AssociateGroupPolicyResponse"
+        "404":
+          description: Group Policy Not Associated
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+     # Group-Policy Deassociation in a site
+  /customers/{orgid}/sites/{siteid}/policydisassociation:
+    x-swagger-router-controller: group_policy
+
+    # Deassociate a group-policy
+    post:
+      description: Deassociate a group-policy in a site
+      operationId: policydisassociation
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: grouppolicy
+          in: body
+          description: Deassociating Group Policy Details
+          required: true
+          schema:
+            $ref: "#/definitions/GroupPolicy"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DeassociateGroupPolicyResponse"
+        "404":
+          description: Group Policy Not Deassociated
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw    
   
@@ -440,10 +520,21 @@ definitions:
       name:
         type: string
       policyAuthorizerid:
+        type: string
+
+  GroupPolicy:
+    type: object
+    required:
+      - parkinggroupid
+      - policyid
+    properties:
+      parkinggroupid:
+        type: string
+      policyid:
         type: string  
 
   CreatePolicyCategoryResponse:
-    type: object
+    type: object 
 
   GetPolicyCategoryResponse:
     type: object    
@@ -470,6 +561,12 @@ definitions:
     type: object
   
   DeleteParkingPolicyResponse:
+    type: object
+
+  AssociateGroupPolicyResponse:
+    type: object
+
+  DeassociateGroupPolicyResponse:
     type: object
 
   ErrorResponse:
