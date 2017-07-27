@@ -61,8 +61,8 @@ function postTag(req, res) {
     var messageId = uuidv1();
 
     //Construct the payload that has to be sent to Kafka
-    policyCategoryObject.orgid = orgId;
-    policyCategoryObject.siteid = siteId;
+    tagObject.orgid = orgId;
+    tagObject.siteid = siteId;
     var payLoad = requestHandler.postRequestHandle();
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
