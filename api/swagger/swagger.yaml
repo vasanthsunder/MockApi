@@ -44,12 +44,12 @@ paths:
             $ref: "#/definitions/ErrorResponse"
 
   # Get, Update, Delete  a specific policy category
-  /customers/{orgid}/sites/{siteid}/policycategories/{policycategoryid}:
-    x-swagger-router-controller: policy_category
-    # Get a policy category
+  /customers/{orgid}/sites/{siteid}/tags/{tagid}:
+    x-swagger-router-controller: policy_tag
+    # Get a policy tag
     get:
-      description: Get a specific policy category in a site
-      operationId: getPolicyCategory
+      description: Get a specific policy tag in a site
+      operationId: getTag
       parameters:
         - name: orgid
           in: path
@@ -61,9 +61,9 @@ paths:
           description: The site ID
           required: true
           type: string
-        - name: policycategoryid
+        - name: tagid
           in: path
-          description: The policy category ID
+          description: The policy tag ID
           required: true
           type: string        
       responses:
@@ -71,9 +71,9 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/GetPolicyCategoryResponse"
+            $ref: "#/definitions/GetTagResponse"
         "404":
-          description: Policy Category Not Found
+          description: Policy Tag Not Found
           schema:
             $ref: "#/definitions/ErrorResponse"
         default:
@@ -81,10 +81,10 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-    # Delete a policy category
+    # Delete a policy tag
     delete:
-      description: Delete a policy category in a site
-      operationId: deletePolicyCategory
+      description: Delete a policy tag in a site
+      operationId: deleteTag
       parameters:
         - name: orgid
           in: path
@@ -96,25 +96,25 @@ paths:
           description: The site ID
           required: true
           type: string
-        - name: policycategoryid
+        - name: tagid
           in: path
-          description: The policy category ID
+          description: The policy tag ID
           required: true
           type: string
       responses:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/DeletePolicyCategoryResponse"
+            $ref: "#/definitions/DeleteTagResponse"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
     
-    # Update a policy category
+    # Update a policy tag
     post:
-      description: Update a policy category
-      operationId: updatePolicyCategory
+      description: Update a policy tag
+      operationId: updateTag
       parameters:
         - name: orgid
           in: path
@@ -126,35 +126,35 @@ paths:
           description: The site ID
           required: true
           type: string
-        - name: policycategoryid
+        - name: tagid
           in: path
-          description: The policy category ID
+          description: The policy tag ID
           required: true
           type: string
-        - name: policycategory
+        - name: tag
           in: body
-          description: Updated a policy category
+          description: Updated a policy tag
           required: true
           schema:
-            $ref: "#/definitions/NewPolicyCategory"
+            $ref: "#/definitions/NewTag"
       responses:
         "200":
           description: Success
           schema:
-            $ref: "#/definitions/UpdatePolicyCategoryResponse"
+            $ref: "#/definitions/UpdateTagResponse"
         default:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
 
   # Create, get all Policy category in a site
-  /customers/{orgid}/sites/{siteid}/policycategories:
-    x-swagger-router-controller: policy_category
+  /customers/{orgid}/sites/{siteid}/tags:
+    x-swagger-router-controller: policy_tag
 
-    # Create a policy category
+    # Create a policy tag
     post:
-      description: Create a policy category in a site
-      operationId: createPolicyCategory
+      description: Create a policy tag in a site
+      operationId: postTag
       parameters:
         - name: orgid
           in: path
@@ -166,20 +166,20 @@ paths:
           description: The site ID
           required: true
           type: string
-        - name: policycategory
+        - name: tag
           in: body
-          description: New Policy Category Details
+          description: New Policy Tag Details
           required: true
           schema:
-            $ref: "#/definitions/NewPolicyCategory"
+            $ref: "#/definitions/NewTag"
       responses:
         "200":
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/CreatePolicyCategoryResponse"
+            $ref: "#/definitions/PostTagResponse"
         "404":
-          description: Policy Category Not Created
+          description: Policy Tag Not Created
           schema:
             $ref: "#/definitions/ErrorResponse"
         default:
@@ -187,10 +187,10 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"          
     
-    # Get all policy categories
+    # Get all policy tags
     get:
-      description: Get all policy categories in a site
-      operationId: getAllPolicyCategories
+      description: Get all policy tags in a site
+      operationId: getAllTags
       parameters:
         - name: orgid
           in: path
@@ -209,7 +209,7 @@ paths:
             type: array
             items: 
               # a pointer to a definition
-              $ref: "#/definitions/GetAllPolicyCategoriesResponse"
+              $ref: "#/definitions/GetAllTagsResponse"
         "404":
           description: Policy Categories Not Found
           schema:
@@ -486,7 +486,7 @@ definitions:
       message:
         type: string
         
-  NewPolicyCategory: 
+  NewTag: 
     type: object
     required:
       - name
@@ -533,19 +533,19 @@ definitions:
       policyid:
         type: string  
 
-  CreatePolicyCategoryResponse:
+  PostTagResponse:
     type: object 
 
-  GetPolicyCategoryResponse:
+  GetTagResponse:
     type: object    
   
-  GetAllPolicyCategoriesResponse:
+  GetAllTagsResponse:
     type: object
   
-  UpdatePolicyCategoryResponse:
+  UpdateTagResponse:
     type: object
 
-  DeletePolicyCategoryResponse:
+  DeleteTagResponse:
     type: object
 
   GetParkingPolicyResponse:

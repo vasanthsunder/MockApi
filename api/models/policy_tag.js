@@ -8,7 +8,7 @@ module.exports = {
 };
 
 /**
- * Returns the getRequestHandle for the policy_category 
+ * Returns the getRequestHandle for the policy_tag 
  * intialise them with some dummy values
  * These can be overidden with in each specific request
  */
@@ -20,7 +20,7 @@ function getRequestHandle() {
             "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:19.491Z",
-            "type": "getParkingCategory",
+            "type": "getTag",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "0be386cc-2cca-4a1c-9a07-0e5a9bc2306c",
@@ -32,7 +32,7 @@ function getRequestHandle() {
             },
             "configprops": {
                 "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
-                "policycategory": {
+                "tag": {
                     "uid": null
                 }
             }
@@ -54,7 +54,7 @@ function postRequestHandle() {
             "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:17.052Z",
-            "type": "postParkingCategory",
+            "type": "postTag",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "0be386cc-2cca-4a1c-9a07-0e5a9bc2306c",
@@ -66,7 +66,7 @@ function postRequestHandle() {
             },
             "configprops": {
                 "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
-                "policycategory": {
+                "tag": {
                     "uid": null,
                     "name": "name",
                     "description": "desc",
@@ -91,7 +91,7 @@ function getAllRequestHandle() {
             "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:21.496Z",
-            "type": "getAllParkingCategory",
+            "type": "getAllTags",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "0be386cc-2cca-4a1c-9a07-0e5a9bc2306c",
@@ -115,7 +115,7 @@ function deleteRequestHandle() {
             "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:25.504Z",
-            "type": "deleteParkingCategory",
+            "type": "deleteTag",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "0be386cc-2cca-4a1c-9a07-0e5a9bc2306c",
@@ -141,7 +141,7 @@ function updateRequestHandle() {
             "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:23.500Z",
-            "type": "updateParkingCategory",
+            "type": "updateTag",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "0be386cc-2cca-4a1c-9a07-0e5a9bc2306c",
@@ -153,7 +153,7 @@ function updateRequestHandle() {
             },
             "configprops": {
                 "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
-                "policycategory": {
+                "tag": {
                     "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
                     "name": "name1",
                     "description": "desc1",

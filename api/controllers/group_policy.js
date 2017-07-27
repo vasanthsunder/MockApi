@@ -31,10 +31,10 @@ function policyassociation(req, res) {
     console.log(associateGroupPolicyObject, '@@@@@@@@@@@@@@@@@@@');
     console.log("payload that we send @@@@",JSON.stringify(payLoad));
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -64,10 +64,10 @@ function policydisassociation(req, res) {
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.GroupPolicyLink.groupPolicyAssociation.push(deassociateGroupPolicyObject);
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {

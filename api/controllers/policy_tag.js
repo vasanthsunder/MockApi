@@ -3,24 +3,24 @@
 const uuidv1 = require('uuid/v1');
 
 var kafkaConnector = require('./../dsi/kafka_connector'),
-    requestHandler = require('./../models/policy_category.js'),
+    requestHandler = require('./../models/policy_tag.js'),
     response = require('./../helpers/response.js');
 // var errorResponseHandle = requestHandler.errorResponseHandle();
 
 //TODO - remove this when intergrated with actual Kafka
 
 /**
- * Check swagger.yaml for the declaration of operationId getPolicyCategory
+ * Check swagger.yaml for the declaration of operationId getTag
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function getPolicyCategory(req, res) {
+function getTag(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var policyCategoryId = params.policycategoryid.value;
+    var tagId = params.tagid.value;
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' policyCategoryId:' + policyCategoryId);
+    console.log('orgId:' + orgId + ' siteId:' + siteId + ' tagId:' + tagId);
 
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
@@ -30,13 +30,13 @@ function getPolicyCategory(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = policyCategoryId;
+    payLoad.request.configprops.uid = tagId;
 
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
-        console.log('producePolicyCategoryMessage err: ' + err + ' message: ' + msg);
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+        console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -48,16 +48,16 @@ function getPolicyCategory(req, res) {
 
 
 /**
- * Check swagger.yaml for the declaration of operationId createPolicyCategory
+ * Check swagger.yaml for the declaration of operationId createTag
  * @param {*} req 
  * @param {*} res 
  */
-function createPolicyCategory(req, res) {
-    console.log('createPolicyCategory');
+function postTag(req, res) {
+    console.log('postTag');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var policyCategoryObject = req.body;
+    var tagObject = req.body;
     var messageId = uuidv1();
 
     //Construct the payload that has to be sent to Kafka
@@ -67,12 +67,12 @@ function createPolicyCategory(req, res) {
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.policycategory = policyCategoryObject;
+    payLoad.request.configprops.tag = tagObject;
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -82,12 +82,12 @@ function createPolicyCategory(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId getAllPolicyCategories
+ * Check swagger.yaml for the declaration of operationId getAllTags
  * @param {*} req 
  * @param {*} res 
  */
-function getAllPolicyCategories(req, res) {
-    console.log('getAllPolicyCategories');
+function getAllTags(req, res) {
+    console.log('getAllTags');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -99,10 +99,10 @@ function getAllPolicyCategories(req, res) {
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -112,35 +112,35 @@ function getAllPolicyCategories(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId deletePolicyCategory
+ * Check swagger.yaml for the declaration of operationId deleteTag
  * @param {*} req 
  * @param {*} res 
  */
-function deletePolicyCategory(req, res) {
-    console.log('deletePolicyCategory');
+function deleteTag(req, res) {
+    console.log('deleteTag');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var policyCategoryId = params.policycategoryid.value;
+    var tagId = params.tagid.value;
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' policyCategoryId:' + policyCategoryId);
+    console.log('orgId:' + orgId + ' siteId:' + siteId + ' tagId:' + tagId);
 
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId deletePolicyCategory: ' + messageId);
+    console.log('messageId deleteTag: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.deleteRequestHandle();
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = policyCategoryId;
+    payLoad.request.configprops.uid = tagId;
 
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
-        console.log('producePolicyCategoryMessage err: ' + err + ' message: ' + msg);
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+        console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         console.log("payload meeesage", payLoad);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -150,36 +150,36 @@ function deletePolicyCategory(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId updatePolicyCategory
+ * Check swagger.yaml for the declaration of operationId updateTag
  * @param {*} req 
  * @param {*} res 
  */
-function updatePolicyCategory(req, res) {
-    console.log('updatePolicyCategory');
+function updateTag(req, res) {
+    console.log('updateTag');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var policyCategoryId = params.policycategoryid.value;
-    var policyCategoryObject = req.body;
+    var tagId = params.tagid.value;
+    var tagObject = req.body;
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' policyCategoryId:' + policyCategoryId);
+    console.log('orgId:' + orgId + ' siteId:' + siteId + ' tagId:' + tagId);
 
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId updatePolicyCategory: ' + messageId);
+    console.log('messageId updateTag: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.updateRequestHandle();
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = policyCategoryId;
-    payLoad.request.configprops.policycategory = policyCategoryObject;
+    payLoad.request.configprops.uid = tagId;
+    payLoad.request.configprops.tag = tagObject;
 
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
-        console.log('producePolicyCategoryMessage err: ' + err + ' message: ' + msg);
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+        console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -191,9 +191,9 @@ function updatePolicyCategory(req, res) {
  * Export these functions to use it from other JS
  */
 module.exports = {
-    getPolicyCategory: getPolicyCategory,
-    createPolicyCategory: createPolicyCategory,
-    getAllPolicyCategories: getAllPolicyCategories,
-    deletePolicyCategory: deletePolicyCategory,
-    updatePolicyCategory: updatePolicyCategory
+    getTag: getTag,
+    postTag: postTag,
+    getAllTags: getAllTags,
+    deleteTag: deleteTag,
+    updateTag: updateTag
 };

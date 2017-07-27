@@ -33,10 +33,10 @@ function getParkingPolicy(req, res) {
     payLoad.request.configprops.uid = parkingpolicyId;
 
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -69,10 +69,10 @@ function createParkingPolicy(req, res) {
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.policy = ParkingPolicyObject;
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -99,10 +99,10 @@ function getAllParkingPolicy(req, res) {
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -136,11 +136,11 @@ function deleteParkingPolicy(req, res) {
     payLoad.request.configprops.uid = parkingPolicyId;
 
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
         console.log("payload meeesage", payLoad);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -176,10 +176,10 @@ function updateParkingPolicy(req, res) {
     payLoad.request.configprops.policy = ParkingPolicyObject;
 
     //Send the message to Kafka. 
-    kafkaConnector.producePolicyCategoryMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumePolicyCategoryMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
