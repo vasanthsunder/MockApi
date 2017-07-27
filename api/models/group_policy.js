@@ -28,10 +28,9 @@ function postAssociateRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "GroupPolicyLink": {
-                    "groupPolicyAssociation": [
-                        
-                    ]
+                "ParkingGroupPolicyLink": {
+                    "parkinggroupid": "string",
+                    "policyid": "string"
                 }
             }
         }
@@ -63,10 +62,9 @@ function postDeassociateRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "GroupPolicyLink": {
-                    "groupPolicyAssociation": [
-                        
-                    ]
+                "ParkingGroupPolicyLink": {
+                    "parkinggroupid": "string",
+                    "policyid": "string"
                 }
             }
         }
