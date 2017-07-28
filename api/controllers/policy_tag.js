@@ -100,10 +100,11 @@ function getAllTags(req, res) {
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
+        console.log("vasanth here @@@",JSON.stringify(payLoad));
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumeKafkaMessage(config.kafka.requestTopic,messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -177,7 +178,7 @@ function updateTag(req, res) {
     payLoad.request.configprops.tag = tagObject;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
