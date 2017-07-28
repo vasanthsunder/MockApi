@@ -5,6 +5,7 @@ const uuidv1 = require('uuid/v1');
 var kafkaConnector = require('./../dsi/kafka_connector'),
     requestHandler = require('./../models/group_policy.js'),
     response = require('./../helpers/response.js');
+    var config = require('./../../config/main.conf');
 // var errorResponseHandle = requestHandler.errorResponseHandle();
 
 //TODO - remove this when intergrated with actual Kafka
@@ -28,10 +29,8 @@ function policyassociation(req, res) {
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.ParkingGroupPolicyLink = associateGroupPolicyObject;
-    console.log(associateGroupPolicyObject, '@@@@@@@@@@@@@@@@@@@');
-    console.log("payload that we send @@@@", JSON.stringify(payLoad));
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestPolicyGroupTopic,payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -63,10 +62,8 @@ function policydisassociation(req, res) {
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.ParkingGroupPolicyLink = deassociateGroupPolicyObject;
-    console.log(deassociateGroupPolicyObject, '@@@@@@@@@@@@@@@@@@@');
-    console.log("payload that we send @@@@", JSON.stringify(payLoad));
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestPolicyGroupTopic,payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {

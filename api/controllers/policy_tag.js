@@ -5,6 +5,7 @@ const uuidv1 = require('uuid/v1');
 var kafkaConnector = require('./../dsi/kafka_connector'),
     requestHandler = require('./../models/policy_tag.js'),
     response = require('./../helpers/response.js');
+    var config = require('./../../config/main.conf');
 // var errorResponseHandle = requestHandler.errorResponseHandle();
 
 //TODO - remove this when intergrated with actual Kafka
@@ -33,7 +34,7 @@ function getTag(req, res) {
     payLoad.request.configprops.uid = tagId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -69,7 +70,7 @@ function postTag(req, res) {
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.tag = tagObject;
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -102,7 +103,7 @@ function getAllTags(req, res) {
     kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
+            kafkaConnector.consumeKafkaMessage(config.kafka.requestTopic,messageId, function (err, msg) {
                 response.Done(err, msg.response, res, req);
             });
         } else {
@@ -136,7 +137,7 @@ function deleteTag(req, res) {
     payLoad.request.configprops.uid = tagId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         console.log("payload meeesage", payLoad);
         if (!err) {

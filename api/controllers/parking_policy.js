@@ -5,6 +5,7 @@ const uuidv1 = require('uuid/v1');
 var kafkaConnector = require('./../dsi/kafka_connector'),
     requestHandler = require('./../models/parking_policy.js'),
     response = require('./../helpers/response.js');
+    var config = require('./../../config/main.conf');
 // var errorResponseHandle = requestHandler.errorResponseHandle();
 
 //TODO - remove this when intergrated with actual Kafka
@@ -33,7 +34,7 @@ function getParkingPolicy(req, res) {
     payLoad.request.configprops.uid = parkingpolicyId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -69,7 +70,7 @@ function createParkingPolicy(req, res) {
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.policy = ParkingPolicyObject;
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -99,7 +100,7 @@ function getAllParkingPolicy(req, res) {
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -136,7 +137,7 @@ function deleteParkingPolicy(req, res) {
     payLoad.request.configprops.uid = parkingPolicyId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
         console.log("payload meeesage", payLoad);
         if (!err) {
@@ -176,7 +177,7 @@ function updateParkingPolicy(req, res) {
     payLoad.request.configprops.policy = ParkingPolicyObject;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
         console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {

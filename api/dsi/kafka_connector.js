@@ -20,7 +20,7 @@ var producerReady = false;
 producer.on('ready', function () {
     producerReady = true;
     // Create topics async
-    producer.createTopics([config.kafka.requestTopic, config.kafka.responseTopic], function (err, data) {
+    producer.createTopics([config.kafka.requestTopic,config.kafka.requestPolicyGroupTopic, config.kafka.responseTopic], function (err, data) {
         consumer = new Consumer(client, config.kafka.consumerPayload, config.kafka.consumerOptions);
         console.log('Topics created: ' + data);
     });
@@ -36,9 +36,9 @@ producer.on('error', function (err) {
  * @param {*} reqJson -- request JSON
  * @param {*} callback 
  */
-function produceKafkaMessage(reqJson, callback) {
+function produceKafkaMessage(requestTopic, reqJson, callback) {
     var payloads = [
-        { topic: config.kafka.requestTopic, messages: JSON.stringify(reqJson), partition: 0 }
+        { topic: requestTopic, messages: JSON.stringify(reqJson), partition: 0 }
     ];
     if (producerReady) {
         producer.send(payloads, function (err, data) {
