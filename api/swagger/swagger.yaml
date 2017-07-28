@@ -363,10 +363,10 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-    # Get all policy categories
+    # Get all parking policies
     get:
       description: Get all parking policies in a site
-      operationId: getAllParkingPolicy
+      operationId: getAllParkingPolicies
       parameters:
         - name: orgid
           in: path
@@ -387,7 +387,7 @@ paths:
               # a pointer to a definition
               $ref: "#/definitions/GetAllParkingPoliciesResponse"
         "404":
-          description: Parking Policy Not Found
+          description: Parking Policies Not Found
           schema:
             $ref: "#/definitions/ErrorResponse"
         default:

@@ -87,8 +87,8 @@ function createParkingPolicy(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-function getAllParkingPolicy(req, res) {
-    console.log('getAllParkingPolicy');
+function getAllParkingPolicies(req, res) {
+    console.log('getAllParkingPolicies');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -194,7 +194,7 @@ function updateParkingPolicy(req, res) {
 module.exports = {
     getParkingPolicy: getParkingPolicy,
     createParkingPolicy: createParkingPolicy,
-    getAllParkingPolicy: getAllParkingPolicy,
+    getAllParkingPolicies: getAllParkingPolicies,
     deleteParkingPolicy: deleteParkingPolicy,
     updateParkingPolicy: updateParkingPolicy
 };
