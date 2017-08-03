@@ -639,8 +639,10 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetActivePolicies"
+            type: array
+            items: 
+              # a pointer to a definition
+              $ref: "#/definitions/GetActivePolicies"
         "404":
           description: No Active Parking Policies
           schema:
