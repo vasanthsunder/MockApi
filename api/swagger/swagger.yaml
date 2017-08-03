@@ -112,7 +112,7 @@ paths:
             $ref: "#/definitions/ErrorResponse"
     
     # Update a policy tag
-    post:
+    put:
       description: Update a policy tag
       operationId: updateTag
       parameters:
@@ -288,7 +288,7 @@ paths:
             $ref: "#/definitions/ErrorResponse" 
 
     # Update a parking policy
-    post:
+    put:
       description: Update a parking policy
       operationId: updateParkingPolicy
       parameters:
