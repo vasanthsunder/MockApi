@@ -4,7 +4,13 @@ module.exports = {
     postRequestHandle: postRequestHandle,
     getAllRequestHandle: getAllRequestHandle,
     deleteRequestHandle: deleteRequestHandle,
-    updateRequestHandle: updateRequestHandle
+    updateRequestHandle: updateRequestHandle,
+    getRequestHandleByVersion: getRequestHandleByVersion,
+    getRequestHandleByVersionHistory: getRequestHandleByVersionHistory,
+    getRequestHandleByTimeline: getRequestHandleByTimeline,
+    getActivePolicyRequestHandle: getActivePolicyRequestHandle,
+    postSearchPolicyRequestHandle: postSearchPolicyRequestHandle
+
 };
 
 /**
@@ -31,7 +37,7 @@ function getRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb"
+                "policyid": "27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb"
             }
         }
     };
@@ -62,7 +68,7 @@ function postRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb",
+                "policyid": "27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb",
                 "policy": {
                     "uid": null,
                     "policyAuthorizerid": "d8547b37-95ba-410d-9382-0b190d951332",
@@ -175,7 +181,7 @@ function deleteRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb"
+                "policyid": "27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb"
             }
         }
     };
@@ -201,7 +207,7 @@ function updateRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "e9fd320a-0cda-4d0e-9272-5f78dfc24691",
+                "policyid": "e9fd320a-0cda-4d0e-9272-5f78dfc24691",
                 "policy": {
                     "uid": null,
                     "policyAuthorizerid": "d8547b37-95ba-410d-9382-0b190d951332",
@@ -269,4 +275,140 @@ function updateRequestHandle() {
         }
     };
     return updateRequestHandle
+}
+
+function getRequestHandleByVersion() {
+    var getRequestHandleByVersion = {
+        "messageid": "bacb8f21-8838-47e5-a0ae-ecf9985756b7",
+        "request": {
+            "instanceid": "7baafe3a-51a3-43d5-ab26-b9651bfc0547",
+            "responsetopic": "parking.policy.request",
+            "requestid": "18189915-b785-4dff-be59-df6af992f3ab",
+            "timestamp": "2017-08-01T16:44:17.596Z",
+            "type": "getPolicyByVersionNumber",
+            "model": "getSensorHistoryFromTo",
+            "action": "CAN_READ",
+            "user": "f4b15f3c-4163-4e7b-a59b-4c2fda485e90",
+            "orgprops": {
+                "orgid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "siteprops": {
+                "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "configprops": {
+                "policyid": "20b399bd-b146-49a8-a618-3409bc17ada1",
+                "version": 6
+            }
+        }
+    };
+    return getRequestHandleByVersion
+}
+
+function getRequestHandleByVersionHistory() {
+    var getRequestHandleByVersionHistory = {
+        "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "request": {
+            "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
+            "responsetopic": "parking.policy.request",
+            "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
+            "timestamp": "2017-08-01T16:50:30.468Z",
+            "type": "getPolicyVersionHistory",
+            "model": "getSensorHistoryFromTo",
+            "action": "CAN_READ",
+            "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",
+            "orgprops": {
+                "orgid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "siteprops": {
+                "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "configprops": {
+                "policyid": "8c191a7b-e82c-48ba-869e-f48e3caece00"
+            }
+        }
+    };
+    return getRequestHandleByVersionHistory
+}
+
+function getRequestHandleByTimeline() {
+    var getRequestHandleByTimeline = {
+        "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "request": {
+            "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
+            "responsetopic": "parking.policy.request",
+            "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
+            "timestamp": "2017-08-01T16:50:30.468Z",
+            "type": "getActivePoliciesWithInTimeline",
+            "model": "getSensorHistoryFromTo",
+            "action": "CAN_READ",
+            "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",
+            "orgprops": {
+                "orgid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "siteprops": {
+                "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "configprops": {
+                "parkinggroupid": "8c191a7b-e82c-48ba-869e-f48e3caece00",
+                "fromtime": "12413413",
+                "totime": "214134134"
+            }
+        }
+    };
+    return getRequestHandleByTimeline
+}
+
+function getActivePolicyRequestHandle() {
+    var getActivePolicyRequestHandle = {
+        "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "request": {
+            "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
+            "responsetopic": "parking.policy.request",
+            "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
+            "timestamp": "2017-08-01T16:50:30.468Z",
+            "type": "getActivePolicy",
+            "model": "getSensorHistoryFromTo",
+            "action": "CAN_READ",
+            "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",
+            "orgprops": {
+                "orgid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "siteprops": {
+                "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "configprops": {
+                "parkinggroupid": "8c191a7b-e82c-48ba-869e-f48e3caece00"
+            }
+        }
+    };
+    return getActivePolicyRequestHandle
+}
+
+function postSearchPolicyRequestHandle() {
+    var postSearchPolicyRequestHandle = {
+        "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "request": {
+            "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
+            "responsetopic": "parking.policy.request",
+            "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
+            "timestamp": "2017-08-01T16:50:30.468Z",
+            "type": "postToSearchPolicy",
+            "model": "getSensorHistoryFromTo",
+            "action": "CAN_READ",
+            "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",
+            "orgprops": {
+                "orgid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "siteprops": {
+                "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
+            },
+            "configprops": {
+                "searchPayload": {
+                    "name": "string",
+                    "category": "string"
+                }
+            }
+        }
+    };
+    return postSearchPolicyRequestHandle
 }

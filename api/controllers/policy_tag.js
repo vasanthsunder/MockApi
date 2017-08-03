@@ -31,7 +31,7 @@ function getTag(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = tagId;
+    payLoad.request.configprops.tagid = tagId;
 
     //Send the message to Kafka. 
     kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
@@ -135,7 +135,7 @@ function deleteTag(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = tagId;
+    payLoad.request.configprops.tagid = tagId;
 
     //Send the message to Kafka. 
     kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
@@ -174,7 +174,7 @@ function updateTag(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = tagId;
+    payLoad.request.configprops.tagid = tagId;
     payLoad.request.configprops.tag = tagObject;
 
     //Send the message to Kafka. 

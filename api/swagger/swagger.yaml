@@ -474,6 +474,217 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+
+     # Group-Policy based on version in a site
+  /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}/version/{version}:
+    x-swagger-router-controller: parking_policy
+
+    # Get a group-policy based on version
+    get:
+      description: Get a specific parking policy in a site
+      operationId: getPolicyByVersionNumber
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The parking policy ID
+          required: true
+          type: string
+        - name: version
+          in: path
+          description: The version Number
+          required: true
+          type: integer    
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetParkingPolicyResponseByVersion"
+        "404":
+          description: Parking Policy Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+     # Group-Policy based on versionhistory of a site
+  /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}/versionhistory:
+    x-swagger-router-controller: parking_policy
+
+    # Get a group-policy based on versionhistory
+    get:
+      description: Get a specific parking policy in a site
+      operationId: getPolicyVersionHistory
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The parking policy ID
+          required: true
+          type: string   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetParkingPolicyResponseByVersionHistory"
+        "404":
+          description: Parking Policy Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+      # Group-Policy based on from and to timestamps of a site
+  /customers/{orgid}/sites/{siteid}/parkinggroups/{parkinggroupid}/activepolicies/fromtime/{fromtime}/totime/{totime}:
+    x-swagger-router-controller: parking_policy
+
+    # Get a group-policy based on timestamps
+    get:
+      description: Get a specific parking policy of a site within timeline
+      operationId: getActivePoliciesWithInTimeline
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkinggroupid
+          in: path
+          description: The Parking Group ID
+          required: true
+          type: string
+        - name: fromtime
+          in: path
+          description: The From Time
+          required: true
+          type: string 
+        - name: totime
+          in: path
+          description: The To Time
+          required: true
+          type: string    
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetParkingPolicyResponseByTimeline"
+        "404":
+          description: Parking Policy Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+     # Active group-policies will be retrieved 
+  /customers/{orgid}/sites/{siteid}/parkinggroups/{parkinggroupid}/activepolicy:
+    x-swagger-router-controller: parking_policy
+
+    # Get a group-policy based on timestamps
+    get:
+      description: Get a specific active parking policy 
+      operationId: getActivePolicy
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkinggroupid
+          in: path
+          description: The Parking Group ID
+          required: true
+          type: string   
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetActivePolicies"
+        "404":
+          description: No Active Parking Policies
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+     # Search For Parking Policy
+  /customers/{orgid}/sites/{siteid}/parkingpolicies/actions/search:
+    x-swagger-router-controller: parking_policy
+
+    # Post to search for parking policy
+    post:
+      description: Post To Search parking policy 
+      operationId: postToSearchPolicy
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: searchpolicy
+          in: body
+          description: Search For A Parking Policy
+          required: true
+          schema:
+            $ref: "#/definitions/SearchParkingPolicy" 
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/PostSearchResponse"
+        "404":
+          description: No Active Parking Policies
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw    
   
@@ -534,7 +745,10 @@ definitions:
         type: string  
 
   PostTagResponse:
-    type: object 
+    type: object
+    
+  SearchParkingPolicy: 
+    type: object
 
   GetTagResponse:
     type: object    
@@ -568,6 +782,21 @@ definitions:
 
   DeassociateGroupPolicyResponse:
     type: object
+
+  GetParkingPolicyResponseByVersion:
+    type: object
+
+  GetParkingPolicyResponseByVersionHistory:
+    type: object
+
+  GetParkingPolicyResponseByTimeline:
+    type: object
+
+  GetActivePolicies:
+    type: object
+
+  PostSearchResponse:
+    type: object 
 
   ErrorResponse:
     #required:

@@ -31,7 +31,7 @@ function getRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "534602bf-1d76-43b0-adcb-c5d932580e05"
+                "tagid": "534602bf-1d76-43b0-adcb-c5d932580e05"
             }
         }
     };
@@ -62,7 +62,7 @@ function postRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
+                "tagid": "534602bf-1d76-43b0-adcb-c5d932580e05",
                 "tag": {
                     "uid": null,
                     "name": "name",
@@ -123,7 +123,7 @@ function deleteRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "534602bf-1d76-43b0-adcb-c5d932580e05"
+                "tagid": "534602bf-1d76-43b0-adcb-c5d932580e05"
             }
         }
     };
@@ -149,7 +149,7 @@ function updateRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
+                "tagid": "534602bf-1d76-43b0-adcb-c5d932580e05",
                 "tag": {
                     "uid": "534602bf-1d76-43b0-adcb-c5d932580e05",
                     "name": "name1",
