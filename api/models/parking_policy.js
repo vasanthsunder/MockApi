@@ -68,7 +68,6 @@ function postRequestHandle() {
                 "siteid": "d8547b37-95ba-410d-9382-0b190d951332"
             },
             "configprops": {
-                "policyid": "27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb",
                 "policy": {
                     "uid": null,
                     "policyAuthorizerid": "d8547b37-95ba-410d-9382-0b190d951332",

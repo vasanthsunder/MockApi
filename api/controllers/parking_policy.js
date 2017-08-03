@@ -31,7 +31,7 @@ function getParkingPolicy(req, res) {
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.uid = parkingpolicyId;
+    payLoad.request.configprops.policyid = parkingpolicyId;
 
     //Send the message to Kafka. 
     kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
