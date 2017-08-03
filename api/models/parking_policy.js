@@ -404,7 +404,7 @@ function postSearchPolicyRequestHandle() {
             "configprops": {
                 "searchPayload": {
                     "name": "string",
-                    "category": "string"
+                    "tagid": "string"
                 }
             }
         }

@@ -547,8 +547,10 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetParkingPolicyResponseByVersionHistory"
+            type: array
+            items: 
+              # a pointer to a definition
+              $ref: "#/definitions/GetParkingPolicyResponseByVersionHistory"
         "404":
           description: Parking Policy Not Found
           schema:
@@ -596,8 +598,10 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetParkingPolicyResponseByTimeline"
+            type: array
+            items: 
+              # a pointer to a definition
+              $ref: "#/definitions/GetParkingPolicyResponseByTimeline"
         "404":
           description: Parking Policy Not Found
           schema:
@@ -675,8 +679,10 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/PostSearchResponse"
+            type: array
+            items: 
+              # a pointer to a definition
+              $ref: "#/definitions/PostSearchResponse"
         "404":
           description: No Active Parking Policies
           schema:
