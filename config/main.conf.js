@@ -2,11 +2,11 @@ var config = {};
 
 //Used in kafka_connector.js
 config.kafka = {
-    requestTopic: 'parking.policy.request',
-    responseTopic: 'parking.policy.response',
-    requestPolicyGroupTopic: 'parking.policygroup.request',
+    requestTopic: 'parking.policy.req',
+    responseTopic: 'parking.policy.res',
+    requestPolicyGroupTopic: 'parking.policygroup.req',
     producerOptions: { requireAcks: 1,  ackTimeoutMs: 1000, partitionerType: 2 },
-    consumerPayload: [{topic: 'parking.policy.response', partition: 0}], //TODO - Change the topic to response topic name
+    consumerPayload: [{topic: 'parking.policy.res', partition: 0}], //TODO - Change the topic to response topic name
     consumerOptions: { autoCommit: false, fromOffset: true }
 }
 
