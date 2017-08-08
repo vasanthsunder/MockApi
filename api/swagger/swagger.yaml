@@ -413,11 +413,11 @@ paths:
             $ref: "#/definitions/ErrorResponse"
 
     # Group-Policy Assocation in a site
-  /customers/{orgid}/sites/{siteid}/policyassociation:
+  /customers/{orgid}/sites/{siteid}/policy/{policyid}/associatedparkinggroups:
     x-swagger-router-controller: group_policy
 
     # Associate a group-policy
-    post:
+    put:
       tags:
         - GroupPolicy
       summary: Associate a group policy in a site
@@ -432,6 +432,11 @@ paths:
         - name: siteid
           in: path
           description: The site ID
+          required: true
+          type: string
+        - name: policyid
+          in: path
+          description: The policy ID
           required: true
           type: string
         - name: grouppolicy
@@ -455,12 +460,8 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
-     # Group-Policy Deassociation in a site
-  /customers/{orgid}/sites/{siteid}/policydisassociation:
-    x-swagger-router-controller: group_policy
-
     # Deassociate a group-policy
-    post:
+    delete:
       tags:
         - GroupPolicy
       summary: Deassociate a group policy in a site
@@ -475,6 +476,11 @@ paths:
         - name: siteid
           in: path
           description: The site ID
+          required: true
+          type: string
+        - name: policyid
+          in: path
+          description: The policy ID
           required: true
           type: string
         - name: grouppolicy
@@ -774,12 +780,9 @@ definitions:
     type: object
     required:
       - parkinggroupid
-      - policyid
     properties:
       parkinggroupid:
-        type: string
-      policyid:
-        type: string  
+        type: string 
 
   PostTagResponse:
     type: object

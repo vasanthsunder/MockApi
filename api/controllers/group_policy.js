@@ -20,6 +20,7 @@ function policyassociation(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
+    var policyId = params.policyid.value;
     var associateGroupPolicyObject = req.body;
     var messageId = uuidv1();
 
@@ -28,6 +29,7 @@ function policyassociation(req, res) {
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
+    payLoad.request.configprops.policyid = policyId;
     payLoad.request.configprops.ParkingGroupPolicyLink = associateGroupPolicyObject;
     //Send the message to Kafka. 
     kafkaConnector.produceKafkaMessage(config.kafka.requestPolicyGroupTopic,payLoad, function (err, msg) {
@@ -53,6 +55,7 @@ function policydisassociation(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
+    var policyId = params.policyid.value;
     var deassociateGroupPolicyObject = req.body;
     var messageId = uuidv1();
 
@@ -61,6 +64,7 @@ function policydisassociation(req, res) {
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
+    payLoad.request.configprops.policyid = policyId;
     payLoad.request.configprops.ParkingGroupPolicyLink = deassociateGroupPolicyObject;
     //Send the message to Kafka. 
     kafkaConnector.produceKafkaMessage(config.kafka.requestPolicyGroupTopic,payLoad, function (err, msg) {
