@@ -1,12 +1,20 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
+  description: "This is server Sensity Interface Service.  You can find out more about"
   title: Sensity Interface Service
 # during dev, should point to your local machine
 host: 0.0.0.0:10010
 # basePath prefixes all resource paths 
 basePath: /
-# 
+#
+tags:
+- name: "policytags"
+  description: "Everything about policytags"
+- name: "parkingpolicies"
+  description: "Everything about parkingpolicies"
+- name: "grouppolicies"
+  description: "Everything about grouppolicies" 
 schemes:
   # tip: remove http to make production-grade
   - http
@@ -18,36 +26,13 @@ consumes:
 produces:
   - application/json
 paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
-
   # Get, Update, Delete  a specific policy category
   /customers/{orgid}/sites/{siteid}/tags/{tagid}:
     x-swagger-router-controller: policy_tag
     # Get a policy tag
     get:
+      tags:
+      - "policytags"
       description: Get a specific policy tag in a site
       operationId: getTag
       parameters:
@@ -83,6 +68,8 @@ paths:
 
     # Delete a policy tag
     delete:
+      tags:
+      - "policytags"
       description: Delete a policy tag in a site
       operationId: deleteTag
       parameters:
@@ -113,6 +100,8 @@ paths:
     
     # Update a policy tag
     put:
+      tags:
+      - "policytags"
       description: Update a policy tag
       operationId: updateTag
       parameters:
@@ -153,6 +142,8 @@ paths:
 
     # Create a policy tag
     post:
+      tags:
+      - "policytags"
       description: Create a policy tag in a site
       operationId: postTag
       parameters:
@@ -189,6 +180,8 @@ paths:
     
     # Get all policy tags
     get:
+      tags:
+      - "policytags"
       description: Get all policy tags in a site
       operationId: getAllTags
       parameters:
@@ -224,6 +217,8 @@ paths:
     x-swagger-router-controller: parking_policy
     # Get a parking policy 
     get:
+      tags:
+      - "parkingpolicies"
       description: Get a specific parking policy in a site
       operationId: getParkingPolicy
       parameters:
@@ -259,6 +254,8 @@ paths:
 
     # Delete a policy category
     delete:
+      tags:
+      - "parkingpolicies"
       description: Delete a parking policy in a site
       operationId: deleteParkingPolicy
       parameters:
@@ -289,6 +286,8 @@ paths:
 
     # Update a parking policy
     put:
+      tags:
+      - "parkingpolicies"
       description: Update a parking policy
       operationId: updateParkingPolicy
       parameters:
@@ -329,6 +328,8 @@ paths:
 
     # Create a parking policy
     post:
+      tags:
+      - "parkingpolicies"
       description: Create a parking policy in a site
       operationId: createParkingPolicy
       parameters:
@@ -365,6 +366,8 @@ paths:
 
     # Get all parking policies
     get:
+      tags:
+      - "parkingpolicies"
       description: Get all parking policies in a site
       operationId: getAllParkingPolicies
       parameters:
@@ -401,6 +404,8 @@ paths:
 
     # Associate a group-policy
     post:
+      tags:
+      - "grouppolicies"
       description: Associate a group-policy in a site
       operationId: policyassociation
       parameters:
@@ -441,6 +446,8 @@ paths:
 
     # Deassociate a group-policy
     post:
+      tags:
+      - "grouppolicies"
       description: Deassociate a group-policy in a site
       operationId: policydisassociation
       parameters:
@@ -481,6 +488,8 @@ paths:
 
     # Get a group-policy based on version
     get:
+      tags:
+      - "parkingpolicies"
       description: Get a specific parking policy in a site
       operationId: getPolicyByVersionNumber
       parameters:
@@ -525,6 +534,8 @@ paths:
 
     # Get a group-policy based on versionhistory
     get:
+      tags:
+      - "parkingpolicies"
       description: Get a specific parking policy in a site
       operationId: getPolicyVersionHistory
       parameters:
@@ -566,6 +577,8 @@ paths:
 
     # Get a group-policy based on timestamps
     get:
+      tags:
+      - "parkingpolicies"
       description: Get a specific parking policy of a site within timeline
       operationId: getActivePoliciesWithInTimeline
       parameters:
@@ -617,6 +630,8 @@ paths:
 
     # Get a group-policy based on timestamps
     get:
+      tags:
+      - "parkingpolicies"
       description: Get a specific active parking policy 
       operationId: getActivePolicy
       parameters:
@@ -655,6 +670,8 @@ paths:
 
     # Post to search for parking policy
     post:
+      tags:
+      - "parkingpolicies"
       description: Post To Search parking policy 
       operationId: postToSearchPolicy
       parameters:
@@ -713,19 +730,16 @@ definitions:
         type: string
       uid:
         type: string
-        default: 'null'
       orgid:
         type: string
-        default: 'null'
       siteid:
         type: string
-        default: 'null'
       createdon:
-        default: null
+        type: string
       lastupdated:
-        default: null
+        type: string
       isdeleted:
-        default: null
+        type: string
 
   NewParkingPolicy: 
     type: object
