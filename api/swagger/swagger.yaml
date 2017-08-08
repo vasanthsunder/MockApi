@@ -2,6 +2,7 @@ swagger: "2.0"
 info:
   version: "0.0.1"
   title: Sensity Interface Service
+  description: Sensity Interface Service APIs 
 # during dev, should point to your local machine
 host: 0.0.0.0:10010
 # basePath prefixes all resource paths 
@@ -17,37 +18,26 @@ consumes:
 # format of the responses to the client (Accepts)
 produces:
   - application/json
-paths:
-  /hello:
-    # binds a127 app logic to a route
-    x-swagger-router-controller: hello_world
-    get:
-      description: Returns 'Hello' to the caller
-      # used as the method name of the controller
-      operationId: hello
-      parameters:
-        - name: name
-          in: query
-          description: The name of the person to whom to say hello
-          required: false
-          type: string
-      responses:
-        "200":
-          description: Success
-          schema:
-            # a pointer to a definition
-            $ref: "#/definitions/HelloWorldResponse"
-        # responses may fall through to errors
-        default:
-          description: Error
-          schema:
-            $ref: "#/definitions/ErrorResponse"
 
+tags:
+  - name: PolicyTag
+    description: Policy Tag Controller
+
+  - name: ParkingPolicy
+    description: Parking Policy Controller
+
+  - name: GroupPolicy
+    description: Group Policy Controller  
+
+paths:
   # Get, Update, Delete  a specific policy category
   /customers/{orgid}/sites/{siteid}/tags/{tagid}:
     x-swagger-router-controller: policy_tag
     # Get a policy tag
     get:
+      tags: 
+        - PolicyTag
+      summary: Get a specific policy tag in a site
       description: Get a specific policy tag in a site
       operationId: getTag
       parameters:
@@ -75,14 +65,17 @@ paths:
         "404":
           description: Policy Tag Not Found
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse"         
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse"      
 
     # Delete a policy tag
     delete:
+      tags: 
+        - PolicyTag
+      summary: Delete a policy tag in a site
       description: Delete a policy tag in a site
       operationId: deleteTag
       parameters:
@@ -113,6 +106,9 @@ paths:
     
     # Update a policy tag
     put:
+      tags: 
+        - PolicyTag
+      summary: Update a policy tag
       description: Update a policy tag
       operationId: updateTag
       parameters:
@@ -153,6 +149,9 @@ paths:
 
     # Create a policy tag
     post:
+      tags: 
+        - PolicyTag
+      summary: Create a policy tag in a site
       description: Create a policy tag in a site
       operationId: postTag
       parameters:
@@ -183,12 +182,15 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
         default:
-          description: Error
+          description: Error   
           schema:
-            $ref: "#/definitions/ErrorResponse"          
+            $ref: "#/definitions/ErrorResponse"   
     
     # Get all policy tags
     get:
+      tags: 
+        - PolicyTag
+      summary: Get all policy tags in a site
       description: Get all policy tags in a site
       operationId: getAllTags
       parameters:
@@ -217,13 +219,15 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            $ref: "#/definitions/ErrorResponse"
 
    # Get, Update, Delete  a specific parking policy
   /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}:
     x-swagger-router-controller: parking_policy
     # Get a parking policy 
     get:
+      tags:
+        - ParkingPolicy
       description: Get a specific parking policy in a site
       operationId: getParkingPolicy
       parameters:
@@ -255,10 +259,12 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
 
     # Delete a policy category
     delete:
+      tags:
+        - ParkingPolicy
       description: Delete a parking policy in a site
       operationId: deleteParkingPolicy
       parameters:
@@ -285,10 +291,12 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
 
     # Update a parking policy
     put:
+      tags:
+        - ParkingPolicy
       description: Update a parking policy
       operationId: updateParkingPolicy
       parameters:
@@ -329,6 +337,8 @@ paths:
 
     # Create a parking policy
     post:
+      tags:
+        - ParkingPolicy
       description: Create a parking policy in a site
       operationId: createParkingPolicy
       parameters:
@@ -365,6 +375,8 @@ paths:
 
     # Get all parking policies
     get:
+      tags:
+        - ParkingPolicy
       description: Get all parking policies in a site
       operationId: getAllParkingPolicies
       parameters:
@@ -393,7 +405,7 @@ paths:
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"  
+            $ref: "#/definitions/ErrorResponse"
 
     # Group-Policy Assocation in a site
   /customers/{orgid}/sites/{siteid}/policyassociation:
@@ -401,6 +413,8 @@ paths:
 
     # Associate a group-policy
     post:
+      tags:
+        - GroupPolicy
       description: Associate a group-policy in a site
       operationId: policyassociation
       parameters:
@@ -441,6 +455,8 @@ paths:
 
     # Deassociate a group-policy
     post:
+      tags:
+        - GroupPolicy
       description: Deassociate a group-policy in a site
       operationId: policydisassociation
       parameters:
@@ -481,6 +497,8 @@ paths:
 
     # Get a group-policy based on version
     get:
+      tags:
+        - GroupPolicy
       description: Get a specific parking policy in a site
       operationId: getPolicyByVersionNumber
       parameters:
@@ -525,6 +543,8 @@ paths:
 
     # Get a group-policy based on versionhistory
     get:
+      tags:
+        - ParkingPolicy
       description: Get a specific parking policy in a site
       operationId: getPolicyVersionHistory
       parameters:
@@ -566,6 +586,8 @@ paths:
 
     # Get a group-policy based on timestamps
     get:
+      tags:
+        - ParkingPolicy
       description: Get a specific parking policy of a site within timeline
       operationId: getActivePoliciesWithInTimeline
       parameters:
@@ -617,6 +639,8 @@ paths:
 
     # Get a group-policy based on timestamps
     get:
+      tags:
+        - ParkingPolicy
       description: Get a specific active parking policy 
       operationId: getActivePolicy
       parameters:
@@ -655,6 +679,8 @@ paths:
 
     # Post to search for parking policy
     post:
+      tags:
+        - ParkingPolicy
       description: Post To Search parking policy 
       operationId: postToSearchPolicy
       parameters:
@@ -690,18 +716,12 @@ paths:
           description: Error
           schema:
             $ref: "#/definitions/ErrorResponse"
+
   /swagger:
     x-swagger-pipe: swagger_raw    
   
-# complex objects have schema definitions
+# complex objects have schema definitions        
 definitions:
-  HelloWorldResponse:
-    required:
-      - message
-    properties:
-      message:
-        type: string
-        
   NewTag: 
     type: object
     required:
@@ -713,19 +733,19 @@ definitions:
         type: string
       uid:
         type: string
-        default: 'null'
+        default: ''
       orgid:
         type: string
-        default: 'null'
+        default: ''
       siteid:
         type: string
-        default: 'null'
+        default: ''
       createdon:
-        default: null
+        default: ''
       lastupdated:
-        default: null
+        default: ''
       isdeleted:
-        default: null
+        default: ''
 
   NewParkingPolicy: 
     type: object
@@ -804,8 +824,9 @@ definitions:
     type: object 
 
   ErrorResponse:
-    #required:
-    #  - message
-    properties:
-      message:
-        type: string
+    type: object
+  #   #required:
+  #   #  - message
+    #  properties:
+    #    message:
+    #      type: string
