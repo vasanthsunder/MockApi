@@ -228,6 +228,7 @@ paths:
     get:
       tags:
         - ParkingPolicy
+      summary: Get a parking policy in a site
       description: Get a specific parking policy in a site
       operationId: getParkingPolicy
       parameters:
@@ -265,6 +266,7 @@ paths:
     delete:
       tags:
         - ParkingPolicy
+      summary: Delete a parking policy in a site
       description: Delete a parking policy in a site
       operationId: deleteParkingPolicy
       parameters:
@@ -297,6 +299,7 @@ paths:
     put:
       tags:
         - ParkingPolicy
+      summary: Update a parking policy
       description: Update a parking policy
       operationId: updateParkingPolicy
       parameters:
@@ -339,6 +342,7 @@ paths:
     post:
       tags:
         - ParkingPolicy
+      summary: Create a parking policy in a site
       description: Create a parking policy in a site
       operationId: createParkingPolicy
       parameters:
@@ -377,6 +381,7 @@ paths:
     get:
       tags:
         - ParkingPolicy
+      summary: Get all parking policies in a site
       description: Get all parking policies in a site
       operationId: getAllParkingPolicies
       parameters:
@@ -415,6 +420,7 @@ paths:
     post:
       tags:
         - GroupPolicy
+      summary: Associate a group policy in a site
       description: Associate a group-policy in a site
       operationId: policyassociation
       parameters:
@@ -457,6 +463,7 @@ paths:
     post:
       tags:
         - GroupPolicy
+      summary: Deassociate a group policy in a site
       description: Deassociate a group-policy in a site
       operationId: policydisassociation
       parameters:
@@ -498,7 +505,8 @@ paths:
     # Get a group-policy based on version
     get:
       tags:
-        - GroupPolicy
+        - ParkingPolicy
+      summary: Get a parking policy in a site
       description: Get a specific parking policy in a site
       operationId: getPolicyByVersionNumber
       parameters:
@@ -545,6 +553,7 @@ paths:
     get:
       tags:
         - ParkingPolicy
+      summary: Get a parking policy in a site
       description: Get a specific parking policy in a site
       operationId: getPolicyVersionHistory
       parameters:
@@ -588,6 +597,7 @@ paths:
     get:
       tags:
         - ParkingPolicy
+      summary: Get a parking policy of a site within timeline
       description: Get a specific parking policy of a site within timeline
       operationId: getActivePoliciesWithInTimeline
       parameters:
@@ -641,6 +651,7 @@ paths:
     get:
       tags:
         - ParkingPolicy
+      summary: Get a active parking policy in a ite
       description: Get a specific active parking policy 
       operationId: getActivePolicy
       parameters:
@@ -681,6 +692,7 @@ paths:
     post:
       tags:
         - ParkingPolicy
+      summary: Post to search parking policies
       description: Post To Search parking policy 
       operationId: postToSearchPolicy
       parameters:
