@@ -27,7 +27,10 @@ tags:
     description: Parking Policy Controller
 
   - name: GroupPolicy
-    description: Group Policy Controller  
+    description: Group Policy Controller
+
+  - name: ParkingSpots
+    description: Parking Spots Controller   
 
 paths:
   # Get, Update, Delete  a specific policy category
@@ -735,6 +738,206 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
 
+     # GetAll, Create  a specific parking spot
+  /customers/{orgid}/sites/{siteid}/parkingspots/spotattributes:
+    x-swagger-router-controller: parking_spots
+
+    # Get all parking spot's metadata in a parking group
+    get:
+      tags:
+        - ParkingSpots
+      summary: Get all parking spot's metadata in a parking group
+      description: Get all parking spot's metadata in a parking group
+      operationId: getAllParkingSpots
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string              
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items: 
+              # a pointer to a definition
+              $ref: "#/definitions/GetAllParkingSpotsResponse"
+        "404":
+          description:  Parking Spot's Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    # Create a parking spot
+    post:
+      tags:
+        - ParkingSpots
+      summary: Create metadata for parking spot in a parking group
+      description: Create metadata for parking spot in a parking group
+      operationId: postParkingSpot
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingSpot
+          in: body
+          description: Parking Spot Details
+          required: true
+          schema:
+            $ref: "#/definitions/ParkingSpotDetails"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/PostParkingSpotResponse"
+        "404":
+          description: Parking Spot Not Created
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+     # Get, Update, Delete  a specific parking spot
+  /customers/{orgid}/sites/{siteid}/parkingspots/{parkingspotid}/spotattributes:
+    x-swagger-router-controller: parking_spots
+    # Get a parking spot 
+    get:
+      tags:
+        - ParkingSpots
+      summary: Get a parking spot metadata in a parking group
+      description: Get a parking spot metadata in a parking group
+      operationId: getParkingSpot
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingspotid
+          in: path
+          description: The parking spot ID
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetParkingSpotResponse"
+        "404":
+          description: Parking Spot Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    # Update a parking spot metadata in a parking group 
+    put:
+      tags:
+        - ParkingSpots
+      summary: Update a parking spot metadata in a parking group
+      description: Update a parking spot metadata in a parking group
+      operationId: updateParkingSpot
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingspotid
+          in: path
+          description: The parking spot ID
+          required: true
+          type: string
+        - name: parkingSpot
+          in: body
+          description: Parking Spot Details
+          required: true
+          schema:
+            $ref: "#/definitions/ParkingSpotDetails"         
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/UpdateParkingSpotResponse"
+        "404":
+          description: Parking Spot Not Updated
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
+    # Delete a parking spot metadata in a parking group 
+    delete:
+      tags:
+        - ParkingSpots
+      summary: Delete a parking spot metadata in a parking group
+      description: Delete a parking spot metadata in a parking group
+      operationId: deleteParkingSpot
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingspotid
+          in: path
+          description: The parking spot ID
+          required: true
+          type: string       
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DeleteParkingSpotResponse"
+        "404":
+          description: Parking Spot Not Deleted
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw    
   
@@ -782,7 +985,10 @@ definitions:
       - parkinggroupid
     properties:
       parkinggroupid:
-        type: string 
+        type: string
+
+  ParkingSpotDetails:
+    type: object
 
   PostTagResponse:
     type: object
@@ -838,6 +1044,21 @@ definitions:
   PostSearchResponse:
     type: object 
 
+  PostParkingSpotResponse:
+    type: object
+
+  GetAllParkingSpotsResponse:
+    type: object
+
+  GetParkingSpotResponse:
+    type: object
+
+  UpdateParkingSpotResponse:
+    type: object
+
+  DeleteParkingSpotResponse:
+    type: object
+    
   ErrorResponse:
     type: object
   #   #required:
