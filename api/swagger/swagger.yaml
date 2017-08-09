@@ -1293,15 +1293,7 @@ definitions:
         default: ''
 
   NewParkingPolicy: 
-    type: object
-    required:
-      - name
-      - policyAuthorizerid
-    properties:
-      name:
-        type: string
-      policyAuthorizerid:
-        type: string
+    $ref: "#/definitions/GetParkingPolicyResponse"
 
   GroupPolicy:
     type: object
@@ -1337,6 +1329,11 @@ definitions:
     
   SearchParkingPolicy: 
     type: object
+    properties:
+      name:
+        type: string
+      tag:
+        type: string
 
   GetTagResponse:
     $ref: "#/definitions/PostTagResponse" 
@@ -1355,39 +1352,220 @@ definitions:
 
   GetParkingPolicyResponse:
     type: object
+    properties:
+      uid:
+        type: string
+      policyauthorizerid:
+        type: string
+      siteid:
+        type: string
+      orgid:
+        type: string
+      tags:
+        type: array
+        items:
+            type: string
+      isLibraryPolicy:
+        type: boolean
+      hashValue:
+        type: string
+      createdOn:
+        type: number
+      lastUpdated:
+        type: number
+      isDeleted:
+        type: boolean
+      version:
+        type: number
+      name:
+        type: string
+      description:
+        type: string
+      timeZone:
+        type: string
+      lastupdated:
+        type: number
+      policyRule:
+        type: array
+        items:
+         $ref: "#/definitions/PolicyRule"
+
+  PolicyRule:
+    type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      priority:
+        type: number
+      parkingSchedule:
+        $ref: "#/definitions/ParkingSchedule"
+      parkingRule:
+         $ref: "#/definitions/ParkingRule"
+
+  ParkingSchedule:
+    type: object
+    properties:
+      description:
+        type: string
+      daysOfWeek:
+        type: array
+        items:
+           type: string
+      months:
+        type: array
+        items:
+           type: string
+      datePeriod:
+        $ref: "#/definitions/DatePeriod"
+      timeRange:
+        type: array
+        items:
+          $ref: "#/definitions/TimeRange"
+  
+  DatePeriod:
+    type: object
+    properties:
+      period:
+        $ref: "#/definitions/Period"
+      occurs:
+        type: string
+  
+  Period:
+    type: object
+    properties:
+      startDateTime:
+        type: string
+      endDateTime:
+        type: string
+
+  TimeRange:
+    type: object
+    properties:
+      startTime:
+        type: string
+      endTime:
+        type: string
+  
+  ParkingRule:
+    type: object
+    properties:
+      description:
+        type: string
+      parkingAllowed:
+        type: boolean
+      parkingCharge:
+        $ref: "#/definitions/ParkingCharge"
+      parkingPenalty:
+        $ref: "#/definitions/ParkingPenalty"
+
+  ParkingCharge:
+    type: object
+    properties:
+      description:
+        type: string
+      chargeDuration:
+        type: array
+        items:
+          $ref: "#/definitions/ChargeDuration"
+      maxDuration:
+        $ref: "#/definitions/MaxDuration"
+      maxCharge:
+        type: number
+        format: double
+
+  ChargeDuration:
+    type: object
+    properties:
+      coarseDuration:
+        type: number
+        format: double
+      sliceDuration:
+        type: number
+        format: double
+      units:
+        type: string
+      price:
+        type: number
+        format: double 
+
+  MaxDuration:
+    type: object
+    properties:
+      duration:
+        type: number
+        format: double
+      units:
+        type: string       
+
+  ParkingPenalty:
+    type: object
+    required:
+      - violationFine
+    properties:
+      description:
+        type: string
+      violationFine:
+        type: array
+        items:
+           $ref: "#/definitions/ViolationFine"
+
+  ViolationFine:
+    type: object         
 
   CreateParkingPolicyResponse:
-    type: object
+    $ref: "#/definitions/GetParkingPolicyResponse" 
 
   UpdateParkingPolicyResponse:
-    type: object
+    $ref: "#/definitions/GetParkingPolicyResponse" 
 
   GetAllParkingPoliciesResponse:
-    type: object
+    $ref: "#/definitions/GetParkingPolicyResponse" 
   
   DeleteParkingPolicyResponse:
     type: object
+    properties:
+      success:
+        type: boolean
 
   AssociateGroupPolicyResponse:
     type: object
+    properties:
+      success:
+        type: boolean
 
   DeassociateGroupPolicyResponse:
     type: object
+    properties:
+      success:
+        type: boolean
 
   GetParkingPolicyResponseByVersion:
-    type: object
+    $ref: "#/definitions/GetParkingPolicyResponse" 
 
   GetParkingPolicyResponseByVersionHistory:
     type: object
+    properties:
+      policyStartDateTime:
+        type: string
+      policyEndDateTime:
+        type: string
+      createdOn:
+        type: number
+        format: int64
+      version:
+        type: number
+        format: int32
 
   GetParkingPolicyResponseByTimeline:
-    type: object
+    $ref: "#/definitions/GetParkingPolicyResponse"
 
   GetActivePolicies:
-    type: object
+    $ref: "#/definitions/GetParkingPolicyResponse"
 
   PostSearchResponse:
-    type: object 
+    $ref: "#/definitions/GetParkingPolicyResponse" 
 
   PostParkingSpotResponse:
     type: object
@@ -1403,6 +1581,9 @@ definitions:
 
   DeleteParkingSpotResponse:
     type: object
+    properties:
+      success:
+        type: boolean
     
   ErrorResponse:
     type: object
