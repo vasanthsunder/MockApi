@@ -1977,16 +1977,87 @@ definitions:
     $ref: "#/definitions/GetParkingPolicyResponse" 
 
   PostParkingSpotResponse:
-    type: object
+    $ref: "#/definitions/GetAllParkingSpotsResponse"
 
   GetAllParkingSpotsResponse:
     type: object
+    properties:
+      uid:
+        type: string
+      name:
+        type: string
+      reservation:
+        type: boolean
+      handicap:
+        type: boolean
+      demarcated:
+        type: boolean
+      geoCoordinates:
+        $ref: "#/definitions/Rectangle"
+      formFactor:
+        type: string
+      monitoringSensorid:
+        type: string
+      businessUse:
+        type: string
+      parkinggroupid:
+        type: string
+      typeOfVehicle:
+        type: array
+        items:
+          type: string
+      howMetered:
+        type: string
+      unDemarcatedNumSpots:
+        type: integer
+        format: int32
+      active:
+        type: string
+      PPV:
+        type: boolean
+      areaType:
+        type: array
+        items:
+          type: string
+      paystationid:
+        type: string
+      currentStatus:
+        type: integer
+        format: int32
+      orgid:
+        type: string
+      siteid:
+        type: string
+      isDeleted:
+        type: boolean
+
+  Rectangle:
+    type: object
+    properties:
+      upperLeftCorner:
+        $ref: "#/definitions/GeoCoordinate"
+      upperRightCorner:
+        $ref: "#/definitions/GeoCoordinate"
+      lowerLeftCorner:
+        $ref: "#/definitions/GeoCoordinate"
+      lowerRightCorner:
+        $ref: "#/definitions/GeoCoordinate"
+
+  GeoCoordinate:
+    type: object
+    properties:
+      latitude:
+        type: number
+        format: double
+      longitude:
+        type: number
+        format: double      
 
   GetParkingSpotResponse:
-    type: object
+    $ref: "#/definitions/GetAllParkingSpotsResponse"
 
   UpdateParkingSpotResponse:
-    type: object
+    $ref: "#/definitions/GetAllParkingSpotsResponse"
 
   DeleteParkingSpotResponse:
     type: object
