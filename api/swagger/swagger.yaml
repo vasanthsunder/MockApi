@@ -1316,6 +1316,26 @@ definitions:
 
   PostTagResponse:
     type: object
+    properties:
+      name:
+        type: string
+      description:
+        type: string
+      uid:
+        type: string
+        default: ''
+      orgid:
+        type: string
+        default: ''
+      siteid:
+        type: string
+        default: ''
+      createdon:
+        default: ''
+      lastupdated:
+        default: ''
+      isdeleted:
+        default: ''
     
   SearchParkingPolicy: 
     type: object
