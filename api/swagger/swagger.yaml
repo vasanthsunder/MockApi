@@ -65,10 +65,24 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetTagResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Policy Tag Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"         
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
@@ -102,10 +116,28 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/DeleteTagResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
     
     # Update a policy tag
     put:
@@ -141,10 +173,28 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/UpdateTagResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
   # Create, get all Policy category in a site
   /customers/{orgid}/sites/{siteid}/tags:
@@ -180,14 +230,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/PostTagResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Policy Tag Not Created
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
-          description: Error   
+          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"   
+            $ref: "#/definitions/ErrorResponse"    
     
     # Get all policy tags
     get:
@@ -215,14 +279,28 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetAllTagsResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Policy Categories Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
    # Get, Update, Delete  a specific parking policy
   /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}:
@@ -256,14 +334,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetParkingPolicyResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Policy Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Delete a policy category
     delete:
@@ -293,10 +385,28 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/DeleteParkingPolicyResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Update a parking policy
     put:
@@ -332,10 +442,28 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/UpdateParkingPolicyResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
+        "404":
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
    # Create, get all parking policy in a site
   /customers/{orgid}/sites/{siteid}/parkingpolicies:
@@ -371,14 +499,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/CreateParkingPolicyResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Policy Category Not Created
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Get all parking policies
     get:
@@ -406,14 +548,28 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetAllParkingPoliciesResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Policies Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Group-Policy Assocation in a site
   /customers/{orgid}/sites/{siteid}/policy/{policyid}/associatedparkinggroups:
@@ -454,14 +610,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/AssociateGroupPolicyResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Group Policy Not Associated
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Deassociate a group-policy
     delete:
@@ -498,14 +668,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/DeassociateGroupPolicyResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Group Policy Not Deassociated
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
      # Group-Policy based on version in a site
   /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}/version/{version}:
@@ -545,14 +729,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetParkingPolicyResponseByVersion"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Policy Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
      # Group-Policy based on versionhistory of a site
   /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}/versionhistory:
@@ -589,14 +787,28 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetParkingPolicyResponseByVersionHistory"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Policy Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
       # Group-Policy based on from and to timestamps of a site
   /customers/{orgid}/sites/{siteid}/parkinggroups/{parkinggroupid}/activepolicies/fromtime/{fromtime}/totime/{totime}:
@@ -643,14 +855,28 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetParkingPolicyResponseByTimeline"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Policy Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
      # Active group-policies will be retrieved 
   /customers/{orgid}/sites/{siteid}/parkinggroups/{parkinggroupid}/activepolicy:
@@ -684,14 +910,28 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GetActivePolicies"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: No Active Parking Policies
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
      # Search For Parking Policy
   /customers/{orgid}/sites/{siteid}/parkingpolicies/actions/search:
@@ -729,14 +969,28 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/PostSearchResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: No Active Parking Policies
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
      # GetAll, Create  a specific parking spot
   /customers/{orgid}/sites/{siteid}/parkingspots/spotattributes:
@@ -768,14 +1022,28 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetAllParkingSpotsResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description:  Parking Spot's Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Create a parking spot
     post:
@@ -807,14 +1075,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/PostParkingSpotResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Spot Not Created
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
      # Get, Update, Delete  a specific parking spot
   /customers/{orgid}/sites/{siteid}/parkingspots/{parkingspotid}/spotattributes:
@@ -848,14 +1130,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetParkingSpotResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Spot Not Found
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Update a parking spot metadata in a parking group 
     put:
@@ -892,14 +1188,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/UpdateParkingSpotResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Spot Not Updated
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
 
     # Delete a parking spot metadata in a parking group 
     delete:
@@ -930,14 +1240,28 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/DeleteParkingSpotResponse"
+        "400":
+          description: Bad Request for report
+        "401":
+          description: Unauthorized to access report
+        "403":
+          description: Forbidden
         "404":
-          description: Parking Spot Not Deleted
-          schema:
-            $ref: "#/definitions/ErrorResponse"
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "500":
+          description: Internal server error
+        "502":
+          description: Bad Gateway
+        "503":
+          description: Service Unavailable
+        "504":
+          description: Gateway Timeout
         default:
           description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"
+            $ref: "#/definitions/ErrorResponse" 
   /swagger:
     x-swagger-pipe: swagger_raw    
   
