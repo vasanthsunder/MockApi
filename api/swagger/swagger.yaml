@@ -67,26 +67,44 @@ paths:
             $ref: "#/definitions/GetTagResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse"      
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"     
 
     # Delete a policy tag
     delete:
@@ -118,26 +136,44 @@ paths:
             $ref: "#/definitions/DeleteTagResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
     
     # Update a policy tag
     put:
@@ -175,24 +211,42 @@ paths:
             $ref: "#/definitions/UpdateTagResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -232,24 +286,42 @@ paths:
             $ref: "#/definitions/PostTagResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse"    
     
@@ -281,26 +353,44 @@ paths:
               $ref: "#/definitions/GetAllTagsResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
    # Get, Update, Delete  a specific parking policy
   /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}:
@@ -336,26 +426,44 @@ paths:
             $ref: "#/definitions/GetParkingPolicyResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
     # Delete a policy category
     delete:
@@ -387,24 +495,42 @@ paths:
             $ref: "#/definitions/DeleteParkingPolicyResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -444,24 +570,42 @@ paths:
             $ref: "#/definitions/UpdateParkingPolicyResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -501,26 +645,44 @@ paths:
             $ref: "#/definitions/CreateParkingPolicyResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
 
     # Get all parking policies
     get:
@@ -550,26 +712,44 @@ paths:
               $ref: "#/definitions/GetAllParkingPoliciesResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
 
     # Group-Policy Assocation in a site
   /customers/{orgid}/sites/{siteid}/policy/{policyid}/associatedparkinggroups:
@@ -612,24 +792,42 @@ paths:
             $ref: "#/definitions/AssociateGroupPolicyResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -670,24 +868,42 @@ paths:
             $ref: "#/definitions/DeassociateGroupPolicyResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -731,24 +947,42 @@ paths:
             $ref: "#/definitions/GetParkingPolicyResponseByVersion"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -789,26 +1023,44 @@ paths:
               $ref: "#/definitions/GetParkingPolicyResponseByVersionHistory"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
 
       # Group-Policy based on from and to timestamps of a site
   /customers/{orgid}/sites/{siteid}/parkinggroups/{parkinggroupid}/activepolicies/fromtime/{fromtime}/totime/{totime}:
@@ -857,26 +1109,44 @@ paths:
               $ref: "#/definitions/GetParkingPolicyResponseByTimeline"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
 
      # Active group-policies will be retrieved 
   /customers/{orgid}/sites/{siteid}/parkinggroups/{parkinggroupid}/activepolicy:
@@ -912,24 +1182,42 @@ paths:
             $ref: "#/definitions/GetActivePolicies"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -971,24 +1259,42 @@ paths:
               $ref: "#/definitions/PostSearchResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -1024,24 +1330,42 @@ paths:
               $ref: "#/definitions/GetAllParkingSpotsResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -1077,24 +1401,42 @@ paths:
             $ref: "#/definitions/PostParkingSpotResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -1132,24 +1474,42 @@ paths:
             $ref: "#/definitions/GetParkingSpotResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -1190,24 +1550,42 @@ paths:
             $ref: "#/definitions/UpdateParkingSpotResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
@@ -1242,26 +1620,44 @@ paths:
             $ref: "#/definitions/DeleteParkingSpotResponse"
         "400":
           description: Bad Request for report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "403":
           description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "404":
           description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "405":
           description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "500":
           description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "502":
           description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "503":
           description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
         "504":
           description: Gateway Timeout
-        default:
-          description: Error
           schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
   /swagger:
     x-swagger-pipe: swagger_raw    
   
@@ -1305,7 +1701,20 @@ definitions:
 
   ParkingSpotDetails:
     type: object
-
+    required:
+      - uid
+      - formFactor
+      - typeOfVehicle
+    properties:
+      uid:
+        type: string
+      formFactor:
+        type: string
+      typeOfVehicle:
+        type: array
+        items:
+          type: string
+                     
   PostTagResponse:
     type: object
     properties:
@@ -1587,6 +1996,9 @@ definitions:
     
   ErrorResponse:
     type: object
+    properties:
+      error:
+        type: string
   #   #required:
   #   #  - message
     #  properties:
