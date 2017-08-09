@@ -21,16 +21,16 @@ produces:
 
 tags:
   - name: PolicyTag
-    description: Policy Tag Controller
+    # description: Policy Tag Controller
 
   - name: ParkingPolicy
-    description: Parking Policy Controller
+    # description: Parking Policy Controller
 
   - name: GroupPolicy
-    description: Group Policy Controller
+    # description: Group Policy Controller
 
   - name: ParkingSpots
-    description: Parking Spots Controller   
+    # description: Parking Spots Controller   
 
 paths:
   # Get, Update, Delete  a specific policy category
@@ -1322,35 +1322,36 @@ definitions:
       description:
         type: string
       uid:
-        type: string
-        default: ''
+        type: string       
       orgid:
-        type: string
-        default: ''
+        type: string      
       siteid:
         type: string
-        default: ''
       createdon:
-        default: ''
+        type: number
       lastupdated:
-        default: ''
+        type: number
       isdeleted:
-        default: ''
+        type: boolean
+        default: false
     
   SearchParkingPolicy: 
     type: object
 
   GetTagResponse:
-    type: object    
+    $ref: "#/definitions/PostTagResponse" 
   
   GetAllTagsResponse:
-    type: object
+    $ref: "#/definitions/PostTagResponse" 
   
   UpdateTagResponse:
-    type: object
+    $ref: "#/definitions/PostTagResponse" 
 
   DeleteTagResponse:
     type: object
+    properties:
+      success:
+        type: boolean
 
   GetParkingPolicyResponse:
     type: object
