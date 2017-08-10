@@ -1,8 +1,8 @@
 swagger: "2.0"
 info:
   version: "0.0.1"
-  title: Sensity Interface Service
-  description: Sensity Interface Service APIs 
+  title: Sensity Parking APIs
+  description: Sensity Parking APIs 
 # during dev, should point to your local machine
 host: 0.0.0.0:10010
 # basePath prefixes all resource paths 
@@ -1670,6 +1670,9 @@ definitions:
     properties:
       name:
         type: string
+      description:
+        type: string
+
 
 
   NewParkingPolicy: 
@@ -1682,6 +1685,21 @@ definitions:
         type: string
       policyAuthorizerid:
         type: string 
+      timeZone:
+        type: string
+      tags:
+        type: array
+        items:
+            type: string
+      policyRule:
+        type: array
+        items:
+         $ref: "#/definitions/PolicyRule"
+
+
+ 
+          
+
 
   GroupPolicy:
     type: object
@@ -1913,7 +1931,14 @@ definitions:
            $ref: "#/definitions/ViolationFine"
 
   ViolationFine:
-    type: object         
+    type: object  
+    properties:
+      violationType:
+        type: string
+      violationFee:
+        type: number
+        format: double       
+       
 
   CreateParkingPolicyResponse:
     $ref: "#/definitions/GetParkingPolicyResponse" 
