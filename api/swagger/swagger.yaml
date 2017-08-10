@@ -1676,11 +1676,11 @@ definitions:
     type: object
     required:
       - name
-      - policyauthorizerid
+      - policyAuthorizerid
     properties:
       name:
         type: string
-      policyauthorizerid:
+      policyAuthorizerid:
         type: string 
 
   GroupPolicy:
@@ -1756,7 +1756,7 @@ definitions:
     properties:
       uid:
         type: string
-      policyauthorizerid:
+      policyAuthorizerid:
         type: string
       siteid:
         type: string
