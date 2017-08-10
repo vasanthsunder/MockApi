@@ -1670,26 +1670,18 @@ definitions:
     properties:
       name:
         type: string
-      description:
-        type: string
-      uid:
-        type: string
-        default: ''
-      orgid:
-        type: string
-        default: ''
-      siteid:
-        type: string
-        default: ''
-      createdon:
-        default: ''
-      lastupdated:
-        default: ''
-      isdeleted:
-        default: ''
+
 
   NewParkingPolicy: 
-    $ref: "#/definitions/GetParkingPolicyResponse"
+    type: object
+    required:
+      - name
+      - policyauthorizerid
+    properties:
+      name:
+        type: string
+      policyauthorizerid:
+        type: string 
 
   GroupPolicy:
     type: object
@@ -1702,11 +1694,11 @@ definitions:
   ParkingSpotDetails:
     type: object
     required:
-      - uid
+      - parkingspotid
       - formFactor
       - typeOfVehicle
     properties:
-      uid:
+      parkingspotid:
         type: string
       formFactor:
         type: string
@@ -1741,7 +1733,7 @@ definitions:
     properties:
       name:
         type: string
-      tag:
+      tagid:
         type: string
 
   GetTagResponse:
@@ -1982,7 +1974,7 @@ definitions:
   GetAllParkingSpotsResponse:
     type: object
     properties:
-      uid:
+      parkingspotid:
         type: string
       name:
         type: string
