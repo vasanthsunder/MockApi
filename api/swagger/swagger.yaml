@@ -752,7 +752,7 @@ paths:
             $ref: "#/definitions/ErrorResponse"  
 
     # Group-Policy Assocation in a site
-  /customers/{orgid}/sites/{siteid}/policy/{policyid}/associatedparkinggroups:
+  /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}/associatedparkinggroups:
     x-swagger-router-controller: group_policy
 
     # Associate a group-policy
@@ -773,7 +773,7 @@ paths:
           description: The site ID
           required: true
           type: string
-        - name: policyid
+        - name: parkingpolicyid
           in: path
           description: The policy ID
           required: true
@@ -849,7 +849,7 @@ paths:
           description: The site ID
           required: true
           type: string
-        - name: policyid
+        - name: parkingpolicyid
           in: path
           description: The policy ID
           required: true

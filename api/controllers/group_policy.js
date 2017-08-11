@@ -20,7 +20,7 @@ function policyassociation(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var policyId = params.policyid.value;
+    var policyId = params.parkingpolicyid.value;
     var associateGroupPolicyObject = req.body;
     var messageId = uuidv1();
 
@@ -55,7 +55,7 @@ function policydisassociation(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var policyId = params.policyid.value;
+    var policyId = params.parkingpolicyid.value;
     var deassociateGroupPolicyObject = req.body;
     var messageId = uuidv1();
 
