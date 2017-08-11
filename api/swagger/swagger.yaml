@@ -1718,12 +1718,52 @@ definitions:
     properties:
       parkingspotid:
         type: string
+      name:
+        type: string
+      reservation:
+        type: boolean
+        default: false
+      handicap:
+        type: boolean
+        default: false
+      demarcated:
+        type: boolean
+        default: false
+      geoCoordinates:
+        $ref: "#/definitions/Rectangle"
       formFactor:
+        type: string
+      monitoringSensorid:
+        type: string
+      businessUse:
+        type: string
+      parkinggroupid:
         type: string
       typeOfVehicle:
         type: array
         items:
           type: string
+      howMetered:
+        type: string
+      unDemarcatedNumSpots:
+        type: number
+      active:
+        type: string
+      PPV:
+        type: boolean
+        default: false
+      areaType:
+        type: array
+        items:
+          type: string
+      paystationid:
+        type: string
+      currentStatus:
+        type: number
+
+
+        
+      
                      
   PostTagResponse:
     type: object
