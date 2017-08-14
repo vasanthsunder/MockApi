@@ -64,11 +64,7 @@ paths:
           description: Success
           schema:
             # a pointer to a definition
-            $ref: "#/definitions/GetTagResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse" 
+            $ref: "#/definitions/GetTagResponse" 
         "401":
           description: Unauthorized to access report
           schema:
@@ -134,10 +130,6 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/DeleteTagResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -209,10 +201,6 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/UpdateTagResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -284,10 +272,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/PostTagResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -351,10 +335,6 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetAllTagsResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -424,10 +404,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetParkingPolicyResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -493,10 +469,6 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/DeleteParkingPolicyResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse" 
         "401":
           description: Unauthorized to access report
           schema:
@@ -568,10 +540,6 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/UpdateParkingPolicyResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -633,8 +601,7 @@ paths:
           type: string
         - name: policy
           in: body
-          description: New Parking Policy Details
-          required: true
+          description: New Parking Policy Details          
           schema:
             $ref: "#/definitions/NewParkingPolicy"
       responses:
@@ -643,10 +610,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/CreateParkingPolicyResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -710,10 +673,6 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetAllParkingPoliciesResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -790,10 +749,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/AssociateGroupPolicyResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -866,10 +821,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/DeassociateGroupPolicyResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -945,10 +896,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetParkingPolicyResponseByVersion"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1021,10 +968,6 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetParkingPolicyResponseByVersionHistory"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1107,10 +1050,6 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetParkingPolicyResponseByTimeline"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1180,10 +1119,6 @@ paths:
           description: Success
           schema:
             $ref: "#/definitions/GetActivePolicies"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse" 
         "401":
           description: Unauthorized to access report
           schema:
@@ -1257,10 +1192,6 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/PostSearchResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse" 
         "401":
           description: Unauthorized to access report
           schema:
@@ -1328,10 +1259,6 @@ paths:
             items: 
               # a pointer to a definition
               $ref: "#/definitions/GetAllParkingSpotsResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1399,10 +1326,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/PostParkingSpotResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1472,10 +1395,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/GetParkingSpotResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1548,10 +1467,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/UpdateParkingSpotResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1618,10 +1533,6 @@ paths:
           schema:
             # a pointer to a definition
             $ref: "#/definitions/DeleteParkingSpotResponse"
-        "400":
-          description: Bad Request for report
-          schema:
-            $ref: "#/definitions/ErrorResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1673,8 +1584,6 @@ definitions:
       description:
         type: string
 
-
-
   NewParkingPolicy: 
     type: object
     required:
@@ -1695,10 +1604,6 @@ definitions:
         type: array
         items:
          $ref: "#/definitions/PolicyRule"
-
-
- 
-          
 
 
   GroupPolicy:
@@ -1759,11 +1664,7 @@ definitions:
       paystationid:
         type: string
       currentStatus:
-        type: number
-
-
-        
-      
+        type: number  
                      
   PostTagResponse:
     type: object
