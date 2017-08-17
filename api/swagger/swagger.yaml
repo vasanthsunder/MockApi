@@ -858,6 +858,72 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse" 
 
+    # Get associatedparkinggroups of a site
+    get:
+      tags:
+        - GroupPolicy
+      summary: Get associated parking groups in a site
+      description: Get associated parking groups in a site
+      operationId: associatedparkinggroups
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The policy ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/GetAssociatedParkingGroupsResponse"
+        "401":
+          description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "405":
+          description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "504":
+          description: Gateway Timeout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+
      # Group-Policy based on version in a site
   /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}/version/{version}:
     x-swagger-router-controller: parking_policy
@@ -1613,6 +1679,16 @@ definitions:
     properties:
       parkinggroupid:
         type: string
+
+  GetAssociatedParkingGroupsResponse:
+    type: object
+    required:
+      - parkinggroupids
+    properties:
+      parkinggroupids:
+        type: array
+        items:
+          type: string
 
   ParkingSpotDetails:
     type: object
