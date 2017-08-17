@@ -1660,6 +1660,8 @@ definitions:
         type: string
       policyAuthorizerid:
         type: string 
+      description:
+        type: string 
       timeZone:
         type: string
       tags:
@@ -1817,6 +1819,8 @@ definitions:
         type: string
       description:
         type: string
+      state:
+        type: string
       timeZone:
         type: string
       lastupdated:
@@ -1899,6 +1903,8 @@ definitions:
   ParkingCharge:
     type: object
     properties:
+      name:
+        type: string
       description:
         type: string
       chargeDuration:
@@ -1954,7 +1960,9 @@ definitions:
         type: string
       violationFee:
         type: number
-        format: double       
+        format: double  
+      recurrence:
+        type: string     
        
 
   CreateParkingPolicyResponse:
