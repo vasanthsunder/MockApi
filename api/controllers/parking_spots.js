@@ -11,11 +11,11 @@ var kafkaConnector = require('./../dsi/kafka_connector'),
 //TODO - remove this when intergrated with actual Kafka
 
 /**
- * Check swagger.yaml for the declaration of operationId GetParkingSpot
+ * Check swagger.yaml for the declaration of operationId getMetadataForParkingSpot
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function getParkingSpot(req, res) {
+function getMetadataForParkingSpot(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -25,9 +25,9 @@ function getParkingSpot(req, res) {
 
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId getParkingSpot: ' + messageId);
+    console.log('messageId getMetadataForParkingSpot: ' + messageId);
     //Construct the payload that has to be sent to Kafka
-    var payLoad = requestHandler.getParkingSpotRequestHandle();
+    var payLoad = requestHandler.getMetadataForParkingSpotRequestHandle();
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
@@ -49,11 +49,11 @@ function getParkingSpot(req, res) {
 
 
 /**
- * Check swagger.yaml for the declaration of operationId postParkingSpot
+ * Check swagger.yaml for the declaration of operationId createMetadataForParkingSpot
  * @param {*} req 
  * @param {*} res 
  */
-function postParkingSpot(req, res) {
+function createMetadataForParkingSpot(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -61,7 +61,7 @@ function postParkingSpot(req, res) {
     var messageId = uuidv1();
 
     //Construct the payload that has to be sent to Kafka
-    var payLoad = requestHandler.postParkingSpotRequestHandle();
+    var payLoad = requestHandler.createMetadataForParkingSpotRequestHandle();
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
@@ -80,18 +80,18 @@ function postParkingSpot(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId getAllParkingSpots
+ * Check swagger.yaml for the declaration of operationId getAllMetadataForParkingSpot
  * @param {*} req 
  * @param {*} res 
  */
-function getAllParkingSpots(req, res) {
+function getAllMetadataForParkingSpot(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var messageId = uuidv1();
     // console.log('orgId:' + orgId + ' siteId:' + siteId);
 
-    var payLoad = requestHandler.getAllParkingSpotsRequestHandle();
+    var payLoad = requestHandler.getAllMetadataForParkingSpotRequestHandle();
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
@@ -110,11 +110,11 @@ function getAllParkingSpots(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId deleteParkingSpot
+ * Check swagger.yaml for the declaration of operationId deleteMetadataForParkingSpot
  * @param {*} req 
  * @param {*} res 
  */
-function deleteParkingSpot(req, res) {
+function deleteMetadataForParkingSpot(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -126,7 +126,7 @@ function deleteParkingSpot(req, res) {
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
     console.log('messageId deleteTag: ' + messageId);
     //Construct the payload that has to be sent to Kafka
-    var payLoad = requestHandler.deleteParkingSpotRequestHandle();
+    var payLoad = requestHandler.deleteMetadataForParkingSpotRequestHandle();
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
@@ -147,11 +147,11 @@ function deleteParkingSpot(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId updateParkingSpot
+ * Check swagger.yaml for the declaration of operationId updateMetadataForParkingSpot
  * @param {*} req 
  * @param {*} res 
  */
-function updateParkingSpot(req, res) {
+function updateMetadataForParkingSpot(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -164,7 +164,7 @@ function updateParkingSpot(req, res) {
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
     console.log('messageId updateTag: ' + messageId);
     //Construct the payload that has to be sent to Kafka
-    var payLoad = requestHandler.updateParkingSpotRequestHandle();
+    var payLoad = requestHandler.updateMetadataForParkingSpotRequestHandle();
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
@@ -187,9 +187,9 @@ function updateParkingSpot(req, res) {
  * Export these functions to use it from other JS
  */
 module.exports = {
-    getParkingSpot: getParkingSpot,
-    postParkingSpot: postParkingSpot,
-    getAllParkingSpots: getAllParkingSpots,
-    deleteParkingSpot: deleteParkingSpot,
-    updateParkingSpot: updateParkingSpot
+    getMetadataForParkingSpot: getMetadataForParkingSpot,
+    createMetadataForParkingSpot: createMetadataForParkingSpot,
+    getAllMetadataForParkingSpot: getAllMetadataForParkingSpot,
+    deleteMetadataForParkingSpot: deleteMetadataForParkingSpot,
+    updateMetadataForParkingSpot: updateMetadataForParkingSpot
 };

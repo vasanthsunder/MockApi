@@ -653,7 +653,7 @@ paths:
         - ParkingPolicy
       summary: Get all parking policies in a site
       description: Get all parking policies in a site
-      operationId: getAllParkingPolicies
+      operationId: getAllParkingPolicy
       parameters:
         - name: orgid
           in: path
@@ -672,7 +672,7 @@ paths:
             type: array
             items: 
               # a pointer to a definition
-              $ref: "#/definitions/GetAllParkingPoliciesResponse"
+              $ref: "#/definitions/getAllParkingPolicyResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -720,7 +720,7 @@ paths:
         - GroupPolicy
       summary: Associate a group policy in a site
       description: Associate a group-policy in a site
-      operationId: policyassociation
+      operationId: policyAssociation
       parameters:
         - name: orgid
           in: path
@@ -792,7 +792,7 @@ paths:
         - GroupPolicy
       summary: Deassociate a group policy in a site
       description: Deassociate a group-policy in a site
-      operationId: policydisassociation
+      operationId: policyDisassociation
       parameters:
         - name: orgid
           in: path
@@ -934,7 +934,7 @@ paths:
         - ParkingPolicy
       summary: Get a parking policy in a site
       description: Get a specific parking policy in a site
-      operationId: getPolicyByVersionNumber
+      operationId: getParkingPolicyVersion
       parameters:
         - name: orgid
           in: path
@@ -1009,7 +1009,7 @@ paths:
         - ParkingPolicy
       summary: Get a parking policy in a site
       description: Get a specific parking policy in a site
-      operationId: getPolicyVersionHistory
+      operationId: getAllVersionsOfParkingPolicy
       parameters:
         - name: orgid
           in: path
@@ -1081,7 +1081,7 @@ paths:
         - ParkingPolicy
       summary: Get a parking policy of a site within timeline
       description: Get a specific parking policy of a site within timeline
-      operationId: getActivePoliciesWithInTimeline
+      operationId: getAllActiveParkingPolicyForPeriod
       parameters:
         - name: orgid
           in: path
@@ -1163,7 +1163,7 @@ paths:
         - ParkingPolicy
       summary: Get a active parking policy in a ite
       description: Get a specific active parking policy 
-      operationId: getActivePolicy
+      operationId: getActiveParkingPolicy
       parameters:
         - name: orgid
           in: path
@@ -1232,7 +1232,7 @@ paths:
         - ParkingPolicy
       summary: Post to search parking policies
       description: Post To Search parking policy 
-      operationId: postToSearchPolicy
+      operationId: searchParkingPolicy
       parameters:
         - name: orgid
           in: path
@@ -1305,7 +1305,7 @@ paths:
         - ParkingSpots
       summary: Get all parking spot's metadata in a parking group
       description: Get all parking spot's metadata in a parking group
-      operationId: getAllParkingSpots
+      operationId: getAllMetadataForParkingSpot
       parameters:
         - name: orgid
           in: path
@@ -1368,7 +1368,7 @@ paths:
         - ParkingSpots
       summary: Create metadata for parking spot in a parking group
       description: Create metadata for parking spot in a parking group
-      operationId: postParkingSpot
+      operationId: createMetadataForParkingSpot
       parameters:
         - name: orgid
           in: path
@@ -1438,7 +1438,7 @@ paths:
         - ParkingSpots
       summary: Get a parking spot metadata in a parking group
       description: Get a parking spot metadata in a parking group
-      operationId: getParkingSpot
+      operationId: getMetadataForParkingSpot
       parameters:
         - name: orgid
           in: path
@@ -1504,7 +1504,7 @@ paths:
         - ParkingSpots
       summary: Update a parking spot metadata in a parking group
       description: Update a parking spot metadata in a parking group
-      operationId: updateParkingSpot
+      operationId: updateMetadataForParkingSpot
       parameters:
         - name: orgid
           in: path
@@ -1576,7 +1576,7 @@ paths:
         - ParkingSpots
       summary: Delete a parking spot metadata in a parking group
       description: Delete a parking spot metadata in a parking group
-      operationId: deleteParkingSpot
+      operationId: deleteMetadataForParkingSpot
       parameters:
         - name: orgid
           in: path
@@ -1971,7 +1971,7 @@ definitions:
   UpdateParkingPolicyResponse:
     $ref: "#/definitions/GetParkingPolicyResponse" 
 
-  GetAllParkingPoliciesResponse:
+  getAllParkingPolicyResponse:
     $ref: "#/definitions/GetParkingPolicyResponse" 
   
   DeleteParkingPolicyResponse:

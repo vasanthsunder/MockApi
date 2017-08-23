@@ -87,8 +87,8 @@ function createParkingPolicy(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-function getAllParkingPolicies(req, res) {
-    console.log('getAllParkingPolicies');
+function getAllParkingPolicy(req, res) {
+    console.log('getAllParkingPolicy');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -190,11 +190,11 @@ function updateParkingPolicy(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId getPolicyByVersionNumber
+ * Check swagger.yaml for the declaration of operationId getParkingPolicyVersion
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function getPolicyByVersionNumber(req, res) {
+function getParkingPolicyVersion(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -228,11 +228,11 @@ function getPolicyByVersionNumber(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId getPolicyVersionHistory
+ * Check swagger.yaml for the declaration of operationId getAllVersionsOfParkingPolicy
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function getPolicyVersionHistory(req, res) {
+function getAllVersionsOfParkingPolicy(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -264,11 +264,11 @@ function getPolicyVersionHistory(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId getActivePoliciesWithInTimeline
+ * Check swagger.yaml for the declaration of operationId getAllActiveParkingPolicyForPeriod
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function getActivePoliciesWithInTimeline(req, res) {
+function getAllActiveParkingPolicyForPeriod(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -304,11 +304,11 @@ function getActivePoliciesWithInTimeline(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId getActivePolicy
+ * Check swagger.yaml for the declaration of operationId getActiveParkingPolicy
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function getActivePolicy(req, res) {
+function getActiveParkingPolicy(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -320,7 +320,7 @@ function getActivePolicy(req, res) {
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
     console.log('messageId parkinggroupId: ' + messageId);
     //Construct the payload that has to be sent to Kafka
-    var payLoad = requestHandler.getActivePolicyRequestHandle();
+    var payLoad = requestHandler.getActiveParkingPolicyRequestHandle();
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;;
@@ -340,11 +340,11 @@ function getActivePolicy(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId postToSearchPolicy
+ * Check swagger.yaml for the declaration of operationId searchParkingPolicy
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function postToSearchPolicy(req, res) {
+function searchParkingPolicy(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -380,12 +380,12 @@ function postToSearchPolicy(req, res) {
 module.exports = {
     getParkingPolicy: getParkingPolicy,
     createParkingPolicy: createParkingPolicy,
-    getAllParkingPolicies: getAllParkingPolicies,
+    getAllParkingPolicy: getAllParkingPolicy,
     deleteParkingPolicy: deleteParkingPolicy,
     updateParkingPolicy: updateParkingPolicy,
-    getPolicyByVersionNumber: getPolicyByVersionNumber,
-    getPolicyVersionHistory: getPolicyVersionHistory,
-    getActivePoliciesWithInTimeline: getActivePoliciesWithInTimeline,
-    getActivePolicy: getActivePolicy,
-    postToSearchPolicy: postToSearchPolicy
+    getParkingPolicyVersion: getParkingPolicyVersion,
+    getAllVersionsOfParkingPolicy: getAllVersionsOfParkingPolicy,
+    getAllActiveParkingPolicyForPeriod: getAllActiveParkingPolicyForPeriod,
+    getActiveParkingPolicy: getActiveParkingPolicy,
+    searchParkingPolicy: searchParkingPolicy
 };

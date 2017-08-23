@@ -8,7 +8,7 @@ module.exports = {
     getRequestHandleByVersion: getRequestHandleByVersion,
     getRequestHandleByVersionHistory: getRequestHandleByVersionHistory,
     getRequestHandleByTimeline: getRequestHandleByTimeline,
-    getActivePolicyRequestHandle: getActivePolicyRequestHandle,
+    getActiveParkingPolicyRequestHandle: getActiveParkingPolicyRequestHandle,
     postSearchPolicyRequestHandle: postSearchPolicyRequestHandle
 
 };
@@ -21,9 +21,9 @@ module.exports = {
 function getRequestHandle() {
     var getRequestHandle = {
         "messageid": "ac9c59f9-eaf0-4a63-9a84-b945877b519a",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "5a65ddc0-33a7-48f7-8626-3d62e6369290",
-            "responsetopic": "parking.policy.request",
             "requestid": "f18cc2be-dfec-48e1-8741-814ca183f719",
             "timestamp": "2017-07-20T19:50:28.866Z",
             "type": "getParkingPolicy",
@@ -52,12 +52,12 @@ function getRequestHandle() {
 function postRequestHandle() {
     var postRequestHandle = {
         "messageid": "c9ea1a49-6076-441e-b0cc-fc4cd87a6ed5",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "6e78a195-0545-4e84-ba91-21b1006d1874",
-            "responsetopic": "parking.policy.request",
             "requestid": "72978964-4f9d-4f99-94a5-381290bcbfb1",
             "timestamp": "2017-07-20T20:04:30.117Z",
-            "type": "postParkingPolicy",
+            "type": "createParkingPolicy",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "ad0bc363-26a5-474b-a575-ea3b5bcebb03",
@@ -140,9 +140,9 @@ function postRequestHandle() {
 function getAllRequestHandle() {
     var getAllRequestHandle = {
         "messageid": "fa529b44-3ddb-4115-a6fc-75c5774cece1",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "e409bcdf-4855-4303-9b1b-a013880da32c",
-            "responsetopic": "parking.policy.request",
             "requestid": "9324e10e-68a7-49cf-8f4a-4d8fc5661c8b",
             "timestamp": "2017-07-20T20:18:52.562Z",
             "type": "getAllParkingPolicy",
@@ -164,9 +164,9 @@ function getAllRequestHandle() {
 function deleteRequestHandle() {
     var deleteRequestHandle = {
         "messageid": "4563ff61-aa91-4955-9da0-93e5ae4f0cb1",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "64e260e2-af09-4e28-a1c9-bddf947213bc",
-            "responsetopic": "parking.policy.request",
             "requestid": "000f215a-ace2-4684-8c42-fa8a1e5efc61",
             "timestamp": "2017-07-20T20:26:31.783Z",
             "type": "deleteParkingPolicy",
@@ -190,9 +190,9 @@ function deleteRequestHandle() {
 function updateRequestHandle() {
     var updateRequestHandle = {
         "messageid": "c90b90bc-1a14-476a-8fcc-a3f103bde17b",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "fba3bd95-f50c-4865-b3b4-94bac0d1f657",
-            "responsetopic": "parking.policy.request",
             "requestid": "95101c0f-232b-45b6-864d-3c95c2c74cf8",
             "timestamp": "2017-07-20T20:29:26.169Z",
             "type": "updateParkingPolicy",
@@ -279,12 +279,12 @@ function updateRequestHandle() {
 function getRequestHandleByVersion() {
     var getRequestHandleByVersion = {
         "messageid": "bacb8f21-8838-47e5-a0ae-ecf9985756b7",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "7baafe3a-51a3-43d5-ab26-b9651bfc0547",
-            "responsetopic": "parking.policy.request",
             "requestid": "18189915-b785-4dff-be59-df6af992f3ab",
             "timestamp": "2017-08-01T16:44:17.596Z",
-            "type": "getPolicyByVersionNumber",
+            "type": "getParkingPolicyVersion",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "f4b15f3c-4163-4e7b-a59b-4c2fda485e90",
@@ -306,12 +306,12 @@ function getRequestHandleByVersion() {
 function getRequestHandleByVersionHistory() {
     var getRequestHandleByVersionHistory = {
         "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
-            "responsetopic": "parking.policy.request",
             "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
             "timestamp": "2017-08-01T16:50:30.468Z",
-            "type": "getPolicyVersionHistory",
+            "type": "getAllVersionsOfParkingPolicy",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",
@@ -332,12 +332,12 @@ function getRequestHandleByVersionHistory() {
 function getRequestHandleByTimeline() {
     var getRequestHandleByTimeline = {
         "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
-            "responsetopic": "parking.policy.request",
             "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
             "timestamp": "2017-08-01T16:50:30.468Z",
-            "type": "getActivePoliciesWithInTimeline",
+            "type": "getAllActiveParkingPolicyForPeriod",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",
@@ -357,15 +357,15 @@ function getRequestHandleByTimeline() {
     return getRequestHandleByTimeline
 }
 
-function getActivePolicyRequestHandle() {
-    var getActivePolicyRequestHandle = {
+function getActiveParkingPolicyRequestHandle() {
+    var getActiveParkingPolicyRequestHandle = {
         "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
-            "responsetopic": "parking.policy.request",
             "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
             "timestamp": "2017-08-01T16:50:30.468Z",
-            "type": "getActivePolicy",
+            "type": "getActiveParkingPolicy",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",
@@ -380,18 +380,18 @@ function getActivePolicyRequestHandle() {
             }
         }
     };
-    return getActivePolicyRequestHandle
+    return getActiveParkingPolicyRequestHandle
 }
 
 function postSearchPolicyRequestHandle() {
     var postSearchPolicyRequestHandle = {
         "messageid": "2c2d0e94-746e-4fef-a8ad-dca8426b0b79",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "ce3676c0-c402-4ed9-90d2-d6447689ecc4",
-            "responsetopic": "parking.policy.request",
             "requestid": "97b8aaf0-d24e-4ee4-9174-3b2a549c19bb",
             "timestamp": "2017-08-01T16:50:30.468Z",
-            "type": "postToSearchPolicy",
+            "type": "searchParkingPolicy",
             "model": "getSensorHistoryFromTo",
             "action": "CAN_READ",
             "user": "76ac05cb-3629-479f-8cfc-36ce13fbf6a7",

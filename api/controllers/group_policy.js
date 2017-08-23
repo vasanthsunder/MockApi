@@ -11,12 +11,12 @@ var config = require('./../../config/main.conf');
 //TODO - remove this when intergrated with actual Kafka
 
 /**
- * Check swagger.yaml for the declaration of operationId policyassociation
+ * Check swagger.yaml for the declaration of operationId policyAssociation
  * @param {*} req 
  * @param {*} res 
  */
-function policyassociation(req, res) {
-    console.log('policyassociation');
+function policyAssociation(req, res) {
+    console.log('policyAssociation');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -46,12 +46,12 @@ function policyassociation(req, res) {
 
 
 /**
- * Check swagger.yaml for the declaration of operationId policydisassociation
+ * Check swagger.yaml for the declaration of operationId policyDisassociation
  * @param {*} req 
  * @param {*} res 
  */
-function policydisassociation(req, res) {
-    console.log('policydisassociation');
+function policyDisassociation(req, res) {
+    console.log('policyDisassociation');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -116,7 +116,7 @@ function associatedparkinggroups(req, res) {
  * Export these functions to use it from other JS
  */
 module.exports = {
-    policyassociation: policyassociation,
-    policydisassociation: policydisassociation,
+    policyAssociation: policyAssociation,
+    policyDisassociation: policyDisassociation,
     associatedparkinggroups: associatedparkinggroups
 };

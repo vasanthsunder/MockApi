@@ -15,9 +15,9 @@ module.exports = {
 function getRequestHandle() {
     var getRequestHandle = {
         "messageid": "12345656",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "75b3e303-ec4f-4643-b483-f98d975a5d24",
-            "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:19.491Z",
             "type": "getTag",
@@ -46,9 +46,9 @@ function getRequestHandle() {
 function postRequestHandle() {
     var postRequestHandle = {
         "messageid": "123456",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "75b3e303-ec4f-4643-b483-f98d975a5d24",
-            "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:17.052Z",
             "type": "postTag",
@@ -82,9 +82,9 @@ function postRequestHandle() {
 function getAllRequestHandle() {
     var getAllRequestHandle = {
         "messageid": "da4067d5-7532-40d1-8763-9f19f02d4f9e",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "75b3e303-ec4f-4643-b483-f98d975a5d24",
-            "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:21.496Z",
             "type": "getAllTags",
@@ -106,9 +106,9 @@ function getAllRequestHandle() {
 function deleteRequestHandle() {
     var deleteRequestHandle = {
         "messageid": "da4067d5-7532-40d1-8763-9f19f02d4f9e",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "75b3e303-ec4f-4643-b483-f98d975a5d24",
-            "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:25.504Z",
             "type": "deleteTag",
@@ -132,9 +132,9 @@ function deleteRequestHandle() {
 function updateRequestHandle() {
     var updateRequestHandle = {
         "messageid": "da4067d5-7532-40d1-8763-9f19f02d4f9e",
+        "responsetopic": "api.reply.interface",
         "request": {
             "instanceid": "75b3e303-ec4f-4643-b483-f98d975a5d24",
-            "responsetopic": "parking.policy.request",
             "requestid": "291ef868-2bd0-4350-ac87-3591039bb397",
             "timestamp": "2017-07-12T02:33:23.500Z",
             "type": "updateTag",
