@@ -1636,7 +1636,154 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"
   /swagger:
-    x-swagger-pipe: swagger_raw    
+    x-swagger-pipe: swagger_raw   
+ # Tags-Policy Assocation in a site
+  /customers/{orgid}/sites/{siteid}/parkingpolicies/{parkingpolicyid}/associatedtags:
+    x-swagger-router-controller: tags_policy_association
+
+    # Associate a tags-policy
+    put:
+      tags:
+        - ParkingPolicy
+      summary: Associate a Tags to policy in a site
+      description: Associate a Tags-policy in a site
+      operationId: policyTagsAssociation
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The policy ID
+          required: true
+          type: string
+        - name: ParkingPolicy
+          in: body
+          description: Associating Tags Policy Details
+          required: true
+          schema:
+            $ref: "#/definitions/TagsPolicy"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/AssociateTagsPolicyResponse"
+        "401":
+          description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "405":
+          description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "504":
+          description: Gateway Timeout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse" 
+
+    # Deassociate a group-policy
+    delete:
+      tags:
+        - ParkingPolicy
+      summary: Disassociate a Tags policy in a site
+      description: Disssociate a Tags-policy in a site
+      operationId: policyTagsDisassociation
+      parameters:
+        - name: orgid
+          in: path
+          description: The org ID
+          required: true
+          type: string
+        - name: siteid
+          in: path
+          description: The site ID
+          required: true
+          type: string
+        - name: parkingpolicyid
+          in: path
+          description: The policy ID
+          required: true
+          type: string
+        - name: ParkingPolicy
+          in: body
+          description: Disassociating Tags Policy Details
+          required: true
+          schema:
+            $ref: "#/definitions/TagsPolicy"
+      responses:
+        "200":
+          description: Success
+          schema:
+            # a pointer to a definition
+            $ref: "#/definitions/DisassociateTagsPolicyResponse"
+        "401":
+          description: Unauthorized to access report
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "403":
+          description: Forbidden
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "404":
+          description: Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "405":
+          description: Method Not Allowed
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "500":
+          description: Internal server error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "502":
+          description: Bad Gateway
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "503":
+          description: Service Unavailable
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "504":
+          description: Gateway Timeout
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        "408":
+          description: Request Timedout
+          schema:
+            $ref: "#/definitions/ErrorResponse"  
   
 # complex objects have schema definitions        
 definitions:
@@ -2106,7 +2253,29 @@ definitions:
     properties:
       success:
         type: boolean
-    
+
+  TagsPolicy:
+    type: object
+    required:
+      - tagids
+    properties:
+      tagids:
+        type: array
+        items:
+          type: string
+
+  AssociateTagsPolicyResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+
+  DisassociateTagsPolicyResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+          
   ErrorResponse:
     type: object
     properties:
