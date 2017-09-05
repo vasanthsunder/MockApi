@@ -84,8 +84,8 @@ function policyDisassociation(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-function associatedparkinggroups(req, res) {
-    console.log('associatedparkinggroups');
+function associatedParkingGroups(req, res) {
+    console.log('associatedParkingGroups');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -118,5 +118,5 @@ function associatedparkinggroups(req, res) {
 module.exports = {
     policyAssociation: policyAssociation,
     policyDisassociation: policyDisassociation,
-    associatedparkinggroups: associatedparkinggroups
+    associatedParkingGroups: associatedParkingGroups
 };

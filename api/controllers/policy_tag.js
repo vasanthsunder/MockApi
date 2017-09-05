@@ -11,11 +11,11 @@ var kafkaConnector = require('./../dsi/kafka_connector'),
 //TODO - remove this when intergrated with actual Kafka
 
 /**
- * Check swagger.yaml for the declaration of operationId getTag
+ * Check swagger.yaml for the declaration of operationId getPolicyCategory
  * @param {*} req -- includes the request params
  * @param {*} res 
  */
-function getTag(req, res) {
+function getPolicyCategory(req, res) {
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -34,7 +34,7 @@ function getTag(req, res) {
     payLoad.request.configprops.tagid = tagId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.tagRequestTopic,payLoad, function (err, msg) {
         console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -53,8 +53,8 @@ function getTag(req, res) {
  * @param {*} req 
  * @param {*} res 
  */
-function postTag(req, res) {
-    console.log('postTag');
+function createPolicyCategory(req, res) {
+    console.log('createPolicyCategory');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -70,7 +70,7 @@ function postTag(req, res) {
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.tag = tagObject;
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.tagRequestTopic,payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -83,12 +83,12 @@ function postTag(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId getAllTags
+ * Check swagger.yaml for the declaration of operationId getAllPolicyCategory
  * @param {*} req 
  * @param {*} res 
  */
-function getAllTags(req, res) {
-    console.log('getAllTags');
+function getAllPolicyCategory(req, res) {
+    console.log('getAllPolicyCategory');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -100,7 +100,7 @@ function getAllTags(req, res) {
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.tagRequestTopic,payLoad, function (err, msg) {
         console.log("vasanth here @@@",JSON.stringify(payLoad));
         console.log('err: ' + err + ' message: ' + msg);
         if (!err) {
@@ -114,12 +114,12 @@ function getAllTags(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId deleteTag
+ * Check swagger.yaml for the declaration of operationId deletePolicyCategory
  * @param {*} req 
  * @param {*} res 
  */
-function deleteTag(req, res) {
-    console.log('deleteTag');
+function deletePolicyCategory(req, res) {
+    console.log('deletePolicyCategory');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -129,7 +129,7 @@ function deleteTag(req, res) {
 
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId deleteTag: ' + messageId);
+    console.log('messageId deletePolicyCategory: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.deleteRequestHandle();
     payLoad.messageid = messageId;
@@ -138,7 +138,7 @@ function deleteTag(req, res) {
     payLoad.request.configprops.tagid = tagId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.tagRequestTopic,payLoad, function (err, msg) {
         console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         console.log("payload meeesage", payLoad);
         if (!err) {
@@ -152,12 +152,12 @@ function deleteTag(req, res) {
 }
 
 /**
- * Check swagger.yaml for the declaration of operationId updateTag
+ * Check swagger.yaml for the declaration of operationId updatePolicyCategory
  * @param {*} req 
  * @param {*} res 
  */
-function updateTag(req, res) {
-    console.log('updateTag');
+function updatePolicyCategory(req, res) {
+    console.log('updatePolicyCategory');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
@@ -168,7 +168,7 @@ function updateTag(req, res) {
 
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId updateTag: ' + messageId);
+    console.log('messageId updatePolicyCategory: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.updateRequestHandle();
     payLoad.messageid = messageId;
@@ -178,7 +178,7 @@ function updateTag(req, res) {
     payLoad.request.configprops.tag = tagObject;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic,payLoad, function (err, msg) {
+    kafkaConnector.produceKafkaMessage(config.kafka.tagRequestTopic,payLoad, function (err, msg) {
         console.log('produceKafkaMessage err: ' + err + ' message: ' + msg);
         if (!err) {
             kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
@@ -193,9 +193,9 @@ function updateTag(req, res) {
  * Export these functions to use it from other JS
  */
 module.exports = {
-    getTag: getTag,
-    postTag: postTag,
-    getAllTags: getAllTags,
-    deleteTag: deleteTag,
-    updateTag: updateTag
+    getPolicyCategory: getPolicyCategory,
+    createPolicyCategory: createPolicyCategory,
+    getAllPolicyCategory: getAllPolicyCategory,
+    deletePolicyCategory: deletePolicyCategory,
+    updatePolicyCategory: updatePolicyCategory
 };

@@ -42,7 +42,7 @@ paths:
         - PolicyTag
       summary: Get a specific policy tag in a site
       description: Get a specific policy tag in a site
-      operationId: getTag
+      operationId: getPolicyCategory
       parameters:
         - name: orgid
           in: path
@@ -108,7 +108,7 @@ paths:
         - PolicyTag
       summary: Delete a policy tag in a site
       description: Delete a policy tag in a site
-      operationId: deleteTag
+      operationId: deletePolicyCategory
       parameters:
         - name: orgid
           in: path
@@ -173,7 +173,7 @@ paths:
         - PolicyTag
       summary: Update a policy tag
       description: Update a policy tag
-      operationId: updateTag
+      operationId: updatePolicyCategory
       parameters:
         - name: orgid
           in: path
@@ -248,7 +248,7 @@ paths:
         - PolicyTag
       summary: Create a policy tag in a site
       description: Create a policy tag in a site
-      operationId: postTag
+      operationId: createPolicyCategory
       parameters:
         - name: orgid
           in: path
@@ -315,7 +315,7 @@ paths:
         - PolicyTag
       summary: Get all policy tags in a site
       description: Get all policy tags in a site
-      operationId: getAllTags
+      operationId: getAllPolicyCategory
       parameters:
         - name: orgid
           in: path
@@ -864,7 +864,7 @@ paths:
         - GroupPolicy
       summary: Get associated parking groups in a site
       description: Get associated parking groups in a site
-      operationId: associatedparkinggroups
+      operationId: associatedParkingGroups
       parameters:
         - name: orgid
           in: path

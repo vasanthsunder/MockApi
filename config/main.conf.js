@@ -3,6 +3,7 @@ var config = {};
 //Used in kafka_connector.js
 config.kafka = {
     requestTopic: 'parking.policy.req',
+    tagRequestTopic: 'parking.tag.req',
     responseTopic: 'api.reply.interface',
     requestPolicyGroupTopic: 'parking.policygroup.req',
     producerOptions: { requireAcks: 1,  ackTimeoutMs: 1000, partitionerType: 2 },
