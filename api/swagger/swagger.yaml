@@ -885,8 +885,10 @@ paths:
         "200":
           description: Success
           schema:
-            # a pointer to a definition
-            $ref: "#/definitions/GetAssociatedParkingGroupsResponse"
+            type: array
+            items:
+              # a pointer to a definition
+              $ref: "#/definitions/GetAssociatedParkingGroupsResponse"
         "401":
           description: Unauthorized to access report
           schema:
@@ -1815,6 +1817,10 @@ definitions:
         type: array
         items:
             type: string
+      policyLevelViolations:
+        type: array
+        items:
+         $ref: "#/definitions/PolicyLevelViolations"
       policyRule:
         type: array
         items:
@@ -1828,16 +1834,25 @@ definitions:
     properties:
       parkinggroupid:
         type: string
+      parkinggroupName:
+        type: string
 
   GetAssociatedParkingGroupsResponse:
     type: object
     required:
-      - parkinggroupids
+      - parkinggroupid
     properties:
-      parkinggroupids:
-        type: array
-        items:
-          type: string
+      parkinggroupid:
+        type: string
+      parkinggroupName:
+        type: string
+      startTime:
+        type: string
+      endTime:
+        type: string
+      version:
+        type: number
+
 
   ParkingSpotDetails:
     type: object
@@ -1972,14 +1987,37 @@ definitions:
         type: string
       lastupdated:
         type: number
+      policyLevelViolations:
+        type: array
+        items:
+         $ref: "#/definitions/PolicyLevelViolations"
       policyRule:
         type: array
         items:
          $ref: "#/definitions/PolicyRule"
 
+  PolicyLevelViolations:
+    properties:
+      policyViolationId:
+        type: string
+      policyViolationName:
+        type: string
+      policyViolationDescription:
+        type: string
+      policyViolationType:
+        type: string
+      policyViolationFee:
+        format: double
+        type: number
+      policyViolationFeeRecurrence:
+        type: string
+    type: object
+
   PolicyRule:
     type: object
     properties:
+      policyRuleId:
+        type: string
       name:
         type: string
       description:
@@ -2067,6 +2105,8 @@ definitions:
   ChargeDuration:
     type: object
     properties:
+      name:
+        type: string
       coarseDuration:
         type: number
         format: double
