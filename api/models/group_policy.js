@@ -31,7 +31,8 @@ function postAssociateRequestHandle() {
             "configprops": {
                 "policyid": "string",
                 "ParkingGroupPolicyLink": {
-                    "parkinggroupid": "string"
+                    "parkinggroupid": "string",
+                     "parkinggroupName": "string"git pu
                 }
             }
         }
