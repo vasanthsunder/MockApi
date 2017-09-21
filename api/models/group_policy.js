@@ -32,7 +32,7 @@ function postAssociateRequestHandle() {
                 "policyid": "string",
                 "ParkingGroupPolicyLink": {
                     "parkinggroupid": "string",
-                     "parkinggroupName": "string"git pu
+                     "parkinggroupName": "string"
                 }
             }
         }
