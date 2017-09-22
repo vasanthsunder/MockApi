@@ -71,65 +71,81 @@ function postRequestHandle() {
                 "policy": {
                     "uid": null,
                     "policyAuthorizerid": "d8547b37-95ba-410d-9382-0b190d951332",
-                    "category": [
+                    "tags": [
                         "new Category",
                         "Category2"
                     ],
                     "name": "ters policy",
                     "timeZone": "Africa/Costarica",
-                    "policyRule": [
-                        {
-                            "name": "Policy rule",
-                            "description": "Policy rule Description",
-                            "priority": 12,
-                            "parkingSchedule": {
-                                "description": "Schedule",
-                                "daysOfWeek": [
-
-                                ],
-                                "months": [
-
-                                ],
-                                "datePeriod": {
-                                    "period": {
-                                        "startDateTime": "2017-06-28T19:31:03Z",
-                                        "endDateTime": "2018-06-28T19:31:03Z"
-                                    },
-                                    "occurs": "yearly"
-                                },
-                                "timeRange": [
-                                    {
-                                        "startTime": "06:00:00",
-                                        "endTime": "11:00:00"
-                                    }
-                                ]
-                            },
-                            "parkingRule": {
-                                "description": "Rule",
-                                "parkingAllowed": true,
-                                "parkingCharge": {
-                                    "description": "Charge Description",
-                                    "chargeDuration": [
-
-                                    ],
-                                    "maxDuration": {
-                                        "duration": 24.0,
-                                        "units": "hours"
-                                    },
-                                    "maxCharge": 60.4
-                                },
-                                "parkingPenalty": {
-                                    "description": "Penalty description",
-                                    "violationFine": [
-                                        {
-                                            "violationType": "maxTimeExceed",
-                                            "violationFee": 100.0
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    ]
+                     "description": "myPolicy Description",
+                     "policyLevelViolations": [
+                          {
+                           "policyViolationId": "string",
+                            "policyViolationName": "string",
+                            "policyViolationDescription": "string",
+                            "policyViolationType": "string",
+                            "policyViolationFee": 0,
+                            "policyViolationFeeRecurrence": "string"
+                          }
+                        ],
+        "policyRule": [
+          {
+            "policyRuleId": "1d3g456k8jv9n0d9f8j6h8k3",
+            "name": "Policy rule",
+            "priority": 12,
+            "description": "Policy rule Description",
+            "parkingRule": {
+              "description": "Rule",
+              "parkingAllowed": true,
+              "parkingCharge": {
+                "name": "Parking Charge 1",
+                "description": "PolicyCharge Desc",
+                "maxCharge": 60.4,
+                "maxDuration": {
+                  "duration": 24,
+                  "units": "hours"
+                },
+                "chargeDuration": [
+                  {
+                    "name": "chargeDuration name",
+                    "coarseDuration": 60,
+                    "sliceDuration": 5,
+                    "units": "hours",
+                    "price": 10
+                  }
+                ]
+              },
+              "parkingPenalty": {
+                "description": "Penalty description",
+                "violationFine": [
+                  {
+                    "violationType": "maxTimeExceed",
+                    "recurrence": "daily",
+                    "violationFee": 100
+                  }
+                ]
+              }
+            },
+            "parkingSchedule": {
+              "datePeriod": {
+                "period": {
+                  "startDateTime": "2017-06-28;19:31:03",
+                  "endDateTime": "2018-06-28;19:31:03"
+                },
+                "occurs": "yearly"
+              },
+              "description": "Schedule",
+              "daysOfWeek": [],
+              "timeRange": [
+                {
+                  "startTime": "06:00:00",
+                  "endTime": "11:00:00"
+                }
+              ],
+              "months": []
+            }
+          }
+        ]
                 }
             }
         }
@@ -216,59 +232,74 @@ function updateRequestHandle() {
                     ],
                     "name": "ters policy",
                     "timeZone": "Africa/Costarica",
-                    "policyRule": [
-                        {
-                            "name": "Policy rule",
-                            "description": "Policy rule Description",
-                            "priority": 12,
-                            "parkingSchedule": {
-                                "description": "Schedule",
-                                "daysOfWeek": [
-
-                                ],
-                                "months": [
-
-                                ],
-                                "datePeriod": {
-                                    "period": {
-                                        "startDateTime": "2017-06-28T19:31:03Z",
-                                        "endDateTime": "2018-06-28T19:31:03Z"
-                                    },
-                                    "occurs": "yearly"
-                                },
-                                "timeRange": [
-                                    {
-                                        "startTime": "06:00:00",
-                                        "endTime": "11:00:00"
-                                    }
-                                ]
-                            },
-                            "parkingRule": {
-                                "description": "Rule",
-                                "parkingAllowed": true,
-                                "parkingCharge": {
-                                    "description": "Charge Description",
-                                    "chargeDuration": [
-
-                                    ],
-                                    "maxDuration": {
-                                        "duration": 24.0,
-                                        "units": "hours"
-                                    },
-                                    "maxCharge": 60.4
-                                },
-                                "parkingPenalty": {
-                                    "description": "Penalty description",
-                                    "violationFine": [
-                                        {
-                                            "violationType": "maxTimeExceed",
-                                            "violationFee": 100.0
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    ]
+                         "policyLevelViolations": [
+                          {
+                           "policyViolationId": "string",
+                            "policyViolationName": "string",
+                            "policyViolationDescription": "string",
+                            "policyViolationType": "string",
+                            "policyViolationFee": 0,
+                            "policyViolationFeeRecurrence": "string"
+                          }
+                        ],
+        "policyRule": [
+          {
+            "policyRuleId": "1d3g456k8jv9n0d9f8j6h8k3",
+            "name": "Policy rule",
+            "priority": 12,
+            "description": "Policy rule Description",
+            "parkingRule": {
+              "description": "Rule",
+              "parkingAllowed": true,
+              "parkingCharge": {
+                "name": "Parking Charge 1",
+                "description": "PolicyCharge Desc",
+                "maxCharge": 60.4,
+                "maxDuration": {
+                  "duration": 24,
+                  "units": "hours"
+                },
+                "chargeDuration": [
+                  {
+                    "name": "chargeDuration name",
+                    "coarseDuration": 60,
+                    "sliceDuration": 5,
+                    "units": "hours",
+                    "price": 10
+                  }
+                ]
+              },
+              "parkingPenalty": {
+                "description": "Penalty description",
+                "violationFine": [
+                  {
+                    "violationType": "maxTimeExceed",
+                    "recurrence": "daily",
+                    "violationFee": 100
+                  }
+                ]
+              }
+            },
+            "parkingSchedule": {
+              "datePeriod": {
+                "period": {
+                  "startDateTime": "2017-06-28;19:31:03",
+                  "endDateTime": "2018-06-28;19:31:03"
+                },
+                "occurs": "yearly"
+              },
+              "description": "Schedule",
+              "daysOfWeek": [],
+              "timeRange": [
+                {
+                  "startTime": "06:00:00",
+                  "endTime": "11:00:00"
+                }
+              ],
+              "months": []
+            }
+          }
+        ]
                 }
             }
         }
