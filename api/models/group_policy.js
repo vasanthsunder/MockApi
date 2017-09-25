@@ -31,8 +31,7 @@ function postAssociateRequestHandle() {
             "configprops": {
                 "policyid": "string",
                 "ParkingGroupPolicyLink": {
-                    "parkinggroupid": "string",
-                     "parkinggroupName": "string"
+                    "parkinggroupid": "string"
                 }
             }
         }

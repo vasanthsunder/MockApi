@@ -1834,8 +1834,6 @@ definitions:
     properties:
       parkinggroupid:
         type: string
-      parkinggroupName:
-        type: string
 
   GetAssociatedParkingGroupsResponse:
     type: object
@@ -1843,8 +1841,6 @@ definitions:
       - parkinggroupid
     properties:
       parkinggroupid:
-        type: string
-      parkinggroupName:
         type: string
       startTime:
         type: string
