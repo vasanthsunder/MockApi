@@ -20,7 +20,7 @@ var producerReady = false;
 producer.on('ready', function () {
     producerReady = true;
     // Create topics async
-    producer.createTopics([config.kafka.requestTopic,config.kafka.requestPolicyGroupTopic, config.kafka.responseTopic], function (err, data) {
+    producer.createTopics([config.kafka.requestTopic,config.kafka.requestPolicyGroupTopic, config.kafka.userDataRequestTopic, config.kafka.responseTopic], function (err, data) {
         consumer = new Consumer(client, config.kafka.consumerPayload, config.kafka.consumerOptions);
         console.log('Topics created: ' + data);
     });
