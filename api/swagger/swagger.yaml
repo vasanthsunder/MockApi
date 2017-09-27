@@ -32,6 +32,9 @@ tags:
   - name: ParkingSpots
     # description: Parking Spots Controller   
 
+  - name: UserData
+    # description: User Data Controller
+
 paths:
   # Get, Update, Delete  a specific policy category
   /customers/{orgid}/sites/{siteid}/tags/{tagid}:
@@ -1787,8 +1790,231 @@ paths:
           schema:
             $ref: "#/definitions/ErrorResponse"  
   
+  # UserData related APIs
+  /applications/{appid}/users/{userid}/userdata: 
+    x-swagger-router-controller: appuserdata
+    get:
+      tags: 
+        - UserData
+      description: Get Application Data in a site 
+      operationId: getAllAppUserData
+      parameters:
+        - name: appid
+          in: path
+          description: The App ID
+          required: true
+          type: string
+        - name: userid
+          in: path
+          description: The User ID
+          required: true
+          type: string
+      responses:
+        "200":
+          description: Success
+          schema:
+            type: array
+            items: 
+              $ref: "#/definitions/AppUserData"
+      # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    post:
+      tags: 
+        - UserData
+      description: Login user
+      operationId: createAppUserData
+      parameters:
+        - name: appid
+          in: path
+          description: The App ID
+          required: true
+          type: string
+        - name: userid
+          in: path
+          description: The User ID
+          required: true
+          type: string
+        - name: login_data
+          in: body
+          description: Login data
+          required: true
+          schema:
+            $ref: "#/definitions/AppUserData"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AppUserData"
+        "404":
+          description: Account Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  
+  /applications/{appid}/users/{userid}/userdata/{userdataid}:
+    x-swagger-router-controller: appuserdata
+    get:
+      tags: 
+        - UserData
+      description: Get a specific piece of Application User Data in a site
+      # used as the method name of the controller
+      operationId: getAppUserData
+      parameters:
+        - name: appid
+          in: path
+          description: The App ID
+          required: true
+          type: string
+        - name: userid
+          in: path
+          description: The User ID
+          required: true
+          type: string
+        - name: userdataid
+          in: path
+          description: The User Data ID
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AppUserData"
+      # responses may fall through to errors
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    put:
+      tags: 
+        - UserData
+      description: Update Application User Data in a site
+      operationId: updateAppUserData
+      parameters:
+        - name: appid
+          in: path
+          description: The App ID
+          required: true
+          type: string
+        - name: userid
+          in: path
+          description: The User ID
+          required: true
+          type: string
+        - name: userdataid
+          in: path
+          description: The User Data ID
+          required: true
+          type: string        
+        - name: login_data
+          in: body
+          description: Login data
+          required: true
+          schema:
+            $ref: "#/definitions/AppUserData"
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/AppUserData"
+        "404":
+          description: Account Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+    delete:
+      tags: 
+        - UserData
+      description: Delete Application User Data in a site
+      operationId: deleteAppUserData
+      parameters:
+        - name: appid
+          in: path
+          description: The App ID
+          required: true
+          type: string
+        - name: userid
+          in: path
+          description: The User ID
+          required: true
+          type: string
+        - name: userdataid
+          in: path
+          description: The User Data ID
+          required: true
+          type: string        
+      responses:
+        "200":
+          description: Success
+          schema:
+            $ref: "#/definitions/DeleteAppUserDataResponse"
+        "404":
+          description: Account Not Found
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+        default:
+          description: Error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+
 # complex objects have schema definitions        
 definitions:
+
+  # AppUserData 
+  AppUserData:
+    type: object
+    required:
+      - dataValue
+    properties:
+      userdataid: 
+        type: string
+      appid:
+        type: string
+      userid:
+        type: string
+      dataValue:
+        type: string
+      createdOn: 
+        type: integer
+        format: int64
+      lastUpdated:
+        type: integer
+        format: int64
+      isDeleted:
+        type: boolean
+        default: false
+
+  DeleteAppUserDataResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+
+  Account:
+    allOf:
+      - $ref: "#/definitions/NewAccount"
+      - required:
+        - id
+        properties:
+          id:
+            type: string
+  NewAccount:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+  
   NewTag: 
     type: object
     required:

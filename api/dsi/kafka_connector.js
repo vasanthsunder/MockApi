@@ -37,6 +37,7 @@ producer.on('error', function (err) {
  * @param {*} callback 
  */
 function produceKafkaMessage(requestTopic, reqJson, callback) {
+    console.log('sending message to Kafka: ', reqJson);
     var payloads = [
         { topic: requestTopic, messages: JSON.stringify(reqJson), partition: 0 }
     ];
