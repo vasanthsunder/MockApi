@@ -1,6 +1,6 @@
 'use strict';
 
-const uuidv1 = require('uuid/v1');
+const uuidv1 = require('uuid/v4');
 
 var kafkaConnector = require('./../dsi/kafka_connector'),
     requestHandler = require('./../models/group_policy.js'),
