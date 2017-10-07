@@ -1981,8 +1981,6 @@ definitions:
   # AppUserData 
   AppUserData:
     type: object
-    required:
-      - datavalue
     properties:
       userdataid: 
         type: string
