@@ -25,7 +25,7 @@ function createAppUserData(req, res) {
     var params = req.swagger.params;
     var appid = params.appid.value;
     var userid = params.userid.value;
-
+    var datavalue = req.body.datavalue;
     // for unique messages we can overide the message id here
     var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
     //Construct the payload that has to be sent to Kafka
@@ -34,6 +34,7 @@ function createAppUserData(req, res) {
     payLoad.request.appuserdataprops.appid = appid;
     payLoad.request.appuserdataprops.userid = userid;
 
+     payLoad.request.appuserdataprops.datavalue=datavalue
     //Send the message to Kafka. 
     kafkaConnector.produceKafkaMessage(config.kafka.userDataRequestTopic, payLoad, function (err, msg) {
         console.log('err: ' + err + ' message: ' + msg);
@@ -121,6 +122,7 @@ function updateAppUserData(req, res) {
     var appid = params.appid.value;
     var userid = params.userid.value;
     var userdataid = params.userdataid.value;
+    var datavalue = req.body.datavalue;
     var messageId = uuidv1();
 
     var payLoad = requestHandler.updateRequestHandle();
@@ -128,6 +130,8 @@ function updateAppUserData(req, res) {
     payLoad.request.appuserdataprops.appid = appid;
     payLoad.request.appuserdataprops.userid = userid;
     payLoad.request.appuserdataprops.userdataid = userdataid;
+    payLoad.request.appuserdataprops.datavalue=datavalue
+
 
     //Send the message to Kafka. 
     kafkaConnector.produceKafkaMessage(config.kafka.userDataRequestTopic, payLoad, function (err, msg) {

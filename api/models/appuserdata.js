@@ -56,7 +56,7 @@ function postRequestHandle() {
           "appuserdataprops":{  
              "appid":"123",
              "userid":"123",
-             "dataValue":"json blob"
+             "datavalue":"json blob"
           }
        }
     };    
@@ -123,7 +123,7 @@ function updateRequestHandle() {
               "appid":"123",
               "userid":"123",
               "userdataid":"27fa445a-ad9c-4f5d-bbb5-cfd99bc579cb",
-              "dataValue":"json blob"
+              "datavalue":"json blob"
            }
         }
      };

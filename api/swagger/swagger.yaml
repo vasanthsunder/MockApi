@@ -1842,7 +1842,7 @@ paths:
           description: Login data
           required: true
           schema:
-            $ref: "#/definitions/AppUserData"
+            $ref: "#/definitions/NewAppUserData"
       responses:
         "200":
           description: Success
@@ -1917,7 +1917,7 @@ paths:
           description: Login data
           required: true
           schema:
-            $ref: "#/definitions/AppUserData"
+            $ref: "#/definitions/NewAppUserData"
       responses:
         "200":
           description: Success
@@ -1969,11 +1969,20 @@ paths:
 # complex objects have schema definitions        
 definitions:
 
+  NewAppUserData:
+    type: object
+    required:
+      - datavalue
+    properties:
+      datavalue:
+        type: string
+
+
   # AppUserData 
   AppUserData:
     type: object
     required:
-      - dataValue
+      - datavalue
     properties:
       userdataid: 
         type: string
@@ -1981,7 +1990,7 @@ definitions:
         type: string
       userid:
         type: string
-      dataValue:
+      datavalue:
         type: string
       createdOn: 
         type: integer
