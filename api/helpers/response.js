@@ -14,8 +14,7 @@ module.exports = {
 function Done(err, data, res, req){
     try{
         if((req && req.timedout) || (res && res.headersSent)) {
-            // TODO: Recover from timeout
-            global.log.error("Request %s timedout", req.originalUrl);
+            // TODO: Recover from timeout            
         } else if(!err && data) {
             if(data && data.success==true && data.result){
                 res.setHeader('Content-Type', 'application/json');
@@ -34,8 +33,7 @@ function Done(err, data, res, req){
             // Send success with whatever data is returned - empty array is still valid data
             //res.setHeader('Content-Type', 'application/json');
             res.status(204);//.json({});
-        } else {
-            global.log.info("Error: ", (err?JSON.stringify(err):''));
+        } else {            
             res.setHeader('Content-Type', 'application/json');
             var status = err.status;
             if(!status)
@@ -49,7 +47,6 @@ function Done(err, data, res, req){
 
     } catch(err){
         console.log('err: '+err);
-        global.log.error(JSON.stringify(err));
     }
 
 }

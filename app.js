@@ -1,5 +1,11 @@
 'use strict';
 
+// Set instance id
+global.instance_id = process.env.NODE_APP_INSTANCE;
+if(!process.env.NODE_APP_INSTANCE){
+    global.instance_id = 'IS-'+require('ip').address();
+}
+
 var SwaggerExpress = require('swagger-express-mw');
 var app = require('express')();
 var cors = require('cors');
@@ -26,7 +32,7 @@ var cors_options = {
 app.use(cors(cors_options));
 
 var timeout = require('connect-timeout');
-app.use(timeout('10s')); // Should be less than haproxy server timeout
+app.use(timeout('15s')); // Should be less than haproxy server timeout
 var onTimedout = function (req, res, next) {
     if (req.timedout)
         global.log.info('Request has timed out.');

@@ -1,84 +1,142 @@
 'use strict';
+var configManager = require('kea-config'),
+    Freezer = require('freezer-js'),
+    Map = require('collections/map'),
+    uuid = require('uuid'),
+    kafka = require('kafka-node');
+;
 
-/** 
- *  All the communication to Kafka happens here.
- *  As of now, only producer and consumer is being used to send and receive messages from Kafka.  
- */
+configManager.init('./config/main.conf.js');
 
-var kafka = require('kafka-node');
-var Producer = kafka.Producer;
-var Consumer = kafka.Consumer;
+var map = new Map({});
+
+
+var kafka_settings = configManager.get('kafka');
+var clientId = kafka_settings.client.clientId;
+var rep_topic = kafka_settings.responseTopic;
+
+
+var HighLevelProducer = kafka.HighLevelProducer;
 var Client = kafka.Client;
-var config = require('./../../config/main.conf');
-var kafkaClientHost = process.env.kafka_client_host || 'localhost';
-var kafkaClientPort = process.env.kafka_client_port || 2181;
-var client = new Client(kafkaClientHost + ':' + kafkaClientPort);
-var producer = new Producer(client, config.kafka.producerOptions);
-var consumer;
-var producerReady = false;
+var KafkaClient = kafka.KafkaClient;
+var producerClient = new KafkaClient(kafka_settings.client.producer);
+var rets = 0;
+var Offset = kafka.Offset;
+var offset = new Offset(producerClient);
+var producer = new HighLevelProducer(producerClient, kafka_settings.producer);
+producerClient.on('close', function () {
+    try {
+        producerClient.connect();
+    } catch (e) {
+        console.log('Producer client error reconnecting', e);
+    }
+});
 
-producer.on('ready', function () {
-    producerReady = true;
-    // Create topics async
-    producer.createTopics([config.kafka.requestTopic,config.kafka.requestPolicyGroupTopic, config.kafka.userDataRequestTopic, config.kafka.responseTopic], function (err, data) {
-        consumer = new Consumer(client, config.kafka.consumerPayload, config.kafka.consumerOptions);
-        console.log('Topics created: ' + data);
-    });
+
+var Consumer = kafka.ConsumerGroup;
+var topics = [rep_topic];
+var consumerGroup = new Consumer(kafka_settings.client.consumer, topics);
+
+consumerGroup.on('close', function () {
+    consumerGroup.scheduleReconnect(1000);
 });
 
 producer.on('error', function (err) {
-    console.log('producer error', err);
+    console.log('Kafka producer error', err);
 });
 
-/**
- * To send message (Json payload) to Kafka 
- * 
- * @param {*} reqJson -- request JSON
- * @param {*} callback 
- */
-function produceKafkaMessage(requestTopic, reqJson, callback) {
-    console.log('sending message to Kafka: ', reqJson);
-    var payloads = [
-        { topic: requestTopic, messages: JSON.stringify(reqJson), partition: 0 }
-    ];
-    if (producerReady) {
-        producer.send(payloads, function (err, data) {
-            if (err) {
-                callback(err)
-            } else {
-                callback(null, data);
+consumerGroup.on('error', function (err) {
+    console.log('Kafka consumer error', err);
+});
+
+consumerGroup.on('message', function (message) {
+    try {
+        var jsonObj = JSON.parse(message.value);
+
+        var state = map.get(jsonObj.messageid);
+        if (state) {
+            if (!jsonObj.response) {
+                console.log("ERROR: Message format invalid!", JSON.stringify(jsonObj));
+                return;
             }
-        });
-    } else {
-        callback(err);
-    }
-}
-
-/**
- * To get the response from Kafka for the request posted 
- * 
- * @param {*} messageId - message ID sent in the request
- * @param {*} callback 
- */
-function consumeKafkaMessage(messageId, callback) {
-    consumer.on('message', function (message) {           
-        var data = JSON.parse(message.value);
-        console.log('messageId: ' + messageId);
-        console.log('data.messageid: ' + data.messageid);
-        if (data.messageid == messageId) {
-            console.log('actual data: ' + JSON.stringify(data));
-            callback(null, data);
+            state.set('result', jsonObj.response);
+        } else {
+            console.log('No state for message', jsonObj.messageid);
         }
-    });
-    consumer.on('error', function (err) {
-        callback(err);
-    });
-}
+    } catch (e) {
+        console.log('Error processing MS response', e.message);
+    }
+});
 
-/**
- * Export these functions to use it from controllers
- */
-module.exports = {
-    produceKafkaMessage: produceKafkaMessage,
-    consumeKafkaMessage: consumeKafkaMessage
+producer.on('ready', function () {
+    console.log("%s Producer connected to Kafka", kafka_settings.client.producer.clientId);
+});
+
+
+var sendToKafka = function (topic, message, callback) {
+    var data = JSON.stringify(message);
+    producer.send([
+        { topic: topic, messages: [data], timestamp: Date.now() }
+    ], function (err, rdata) {
+        if (err) {
+            if (err.name && (err.name == 'BrokerNotAvailableError')) {
+                // Have to retry, maybe electing leader
+                producer.send([
+                    { topic: topic, messages: [data] }
+                ], function (err, rdata) {
+                    if (err) {
+                        console.log('producer send error', err);
+                        callback(err)
+                    }
+                    else
+                        console.log('sent %d messages', ++rets);
+                });
+
+            } else if (err) {
+                console.log('producer send message error', err);
+                callback(err);
+            }
+        }
+        else
+            console.log('sent %d messages', ++rets);
+    });
+
+
+};
+
+exports.Send = function (requestTopic, msg, callback) {
+    var requestObj = msg.request;
+    requestObj.instanceid = kafka_settings.instance_id;
+    requestObj.timestamp = new Date().toISOString();
+    delete msg.messageid;
+    delete msg.responsetopic;
+    var requestObj = msg.request;
+    var data = {
+        messageid: uuid.v4(),
+        responsetopic: rep_topic,
+        request: requestObj
+    };
+
+    console.log('Sending message id=%s to topic=%s', data.messageid, requestTopic);
+
+    var freezer = new Freezer({ starttime: msg.timestamp });
+    var state = freezer.get();
+    map.set(data.messageid, state);
+
+    freezer.on('update', function (newValue) {
+        var result = freezer.get().result;
+        console.log("interface <= microservices ", JSON.stringify(result).substring(0,150));
+        (result.error) ? callback(result, null) : callback(null, result);
+        map.delete(data.messageid);
+    });
+
+    var cb = function (error, data) {
+        if (error) {
+            console.log(error);
+            callback(error, null);
+        }
+    };
+
+    console.log("Sending message to Kafka on topic ", requestTopic, " ", JSON.stringify(data));
+    sendToKafka(requestTopic, data, cb);
 };

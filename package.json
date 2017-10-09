@@ -16,7 +16,10 @@
     "swagger-tools": "^0.10.1",
     "swagger-ui": "^3.1.4",
     "uuid": "^3.1.0",
-    "yamljs": "^0.3.0"
+    "yamljs": "^0.3.0",
+    "freezer-js": "^0.8.1",
+    "kea-config": "^0.2.3",
+    "collections": "^1.2.4"
   },
   "devDependencies": {
     "should": "^7.1.0",

@@ -1,14 +1,11 @@
 'use strict';
 
-const uuidv1 = require('uuid/v4');
+const uuidv4 = require('uuid/v4');
 
 var kafkaConnector = require('./../dsi/kafka_connector'),
     requestHandler = require('./../models/parking_policy.js'),
-    response = require('./../helpers/response.js');
-var config = require('./../../config/main.conf');
-// var errorResponseHandle = requestHandler.errorResponseHandle();
-
-//TODO - remove this when intergrated with actual Kafka
+    response = require('./../helpers/response.js'),
+    config = require('./../../config/main.conf');
 
 /**
  * Check swagger.yaml for the declaration of operationId getParkingPolicy
@@ -20,29 +17,17 @@ function getParkingPolicy(req, res) {
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var parkingpolicyId = params.parkingpolicyid.value;
+    var messageId = uuidv4();
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' parkingpolicyId' + parkingpolicyId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId parkingpolicyId: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.getRequestHandle();
     payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
-    payLoad.request.configprops.policyid = parkingpolicyId;
-
+    payLoad.request.configprops.policyid = parkingpolicyId;    
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, res, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 
 }
@@ -54,31 +39,23 @@ function getParkingPolicy(req, res) {
  * @param {*} res 
  */
 function createParkingPolicy(req, res) {
-    console.log('createParkingPolicy');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var ParkingPolicyObject = req.body;
-    var messageId = uuidv1();
+    var messageId = uuidv4();
 
     //Construct the payload that has to be sent to Kafka
     ParkingPolicyObject.orgid = orgId;
     ParkingPolicyObject.siteid = siteId;
     var payLoad = requestHandler.postRequestHandle();
-    payLoad.messageid = messageId; // for unique messages we can overide the message id here
+    payLoad.messageid = messageId;
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
     payLoad.request.configprops.policy = ParkingPolicyObject;
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, msg, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -88,27 +65,21 @@ function createParkingPolicy(req, res) {
  * @param {*} res 
  */
 function getAllParkingPolicy(req, res) {
-    console.log('getAllParkingPolicy');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
-    var messageId = uuidv1();
-    // console.log('orgId:' + orgId + ' siteId:' + siteId);
+    var messageId = uuidv4();
 
     var payLoad = requestHandler.getAllRequestHandle();
     payLoad.messageid = messageId; // for unique messages we can overide the message id here
     payLoad.request.orgprops.orgid = orgId;
     payLoad.request.siteprops.siteid = siteId;
+
+    console.log("############ GetAll Policies - BEFORE ##########", new Date().toISOString());
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, msg, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        console.log("############ GetAll Policies - AFTER ##########", new Date().toISOString());
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -118,17 +89,12 @@ function getAllParkingPolicy(req, res) {
  * @param {*} res 
  */
 function deleteParkingPolicy(req, res) {
-    console.log('deleteParkingPolicy');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var parkingPolicyId = params.parkingpolicyid.value;
+    var messageId = uuidv4();
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' ParkingPolicyId:' + parkingPolicyId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId deleteParkingPolicy: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.deleteRequestHandle();
     payLoad.messageid = messageId;
@@ -137,16 +103,8 @@ function deleteParkingPolicy(req, res) {
     payLoad.request.configprops.policyid = parkingPolicyId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        console.log("payload meeesage", payLoad);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, msg, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -156,18 +114,13 @@ function deleteParkingPolicy(req, res) {
  * @param {*} res 
  */
 function updateParkingPolicy(req, res) {
-    console.log('updateParkingPolicy');
     var params = req.swagger.params;
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var parkingPolicyId = params.parkingpolicyid.value;
     var ParkingPolicyObject = req.body;
+    var messageId = uuidv4();
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' ParkingPolicyId:' + parkingPolicyId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId updateParkingPolicy: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.updateRequestHandle();
     payLoad.messageid = messageId;
@@ -177,15 +130,8 @@ function updateParkingPolicy(req, res) {
     payLoad.request.configprops.policy = ParkingPolicyObject;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, msg, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -200,12 +146,8 @@ function getParkingPolicyVersion(req, res) {
     var siteId = params.siteid.value;
     var parkingpolicyId = params.parkingpolicyid.value;
     var version = params.version.value;
+    var messageId = uuidv4();
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' parkingpolicyId' + parkingpolicyId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId parkingpolicyId: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.getRequestHandleByVersion();
     payLoad.messageid = messageId;
@@ -215,15 +157,8 @@ function getParkingPolicyVersion(req, res) {
     payLoad.request.configprops.version = version;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, res, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -237,12 +172,8 @@ function getAllVersionsOfParkingPolicy(req, res) {
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var parkingpolicyId = params.parkingpolicyid.value;
+    var messageId = uuidv4();
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' parkingpolicyId' + parkingpolicyId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId parkingpolicyId: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.getRequestHandleByVersionHistory();
     payLoad.messageid = messageId;
@@ -251,15 +182,8 @@ function getAllVersionsOfParkingPolicy(req, res) {
     payLoad.request.configprops.policyid = parkingpolicyId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, res, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -275,12 +199,8 @@ function getAllActiveParkingPolicyForPeriod(req, res) {
     var parkinggroupId = params.parkinggroupid.value;
     var fromTime = params.fromtime.value;
     var toTime = params.totime.value;
+    var messageId = uuidv4();
 
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' parkinggroupId' + parkinggroupId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId parkinggroupId: ' + messageId);
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.getRequestHandleByTimeline();
     payLoad.messageid = messageId;
@@ -291,15 +211,8 @@ function getAllActiveParkingPolicyForPeriod(req, res) {
     payLoad.request.configprops.parkinggroupid = parkinggroupId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, res, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -313,12 +226,7 @@ function getActiveParkingPolicy(req, res) {
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var parkinggroupId = params.parkinggroupid.value;
-
-    console.log('orgId:' + orgId + ' siteId:' + siteId + ' parkinggroupId' + parkinggroupId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId parkinggroupId: ' + messageId);
+    var messageId = uuidv4();
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.getActiveParkingPolicyRequestHandle();
     payLoad.messageid = messageId;
@@ -327,15 +235,8 @@ function getActiveParkingPolicy(req, res) {
     payLoad.request.configprops.parkinggroupid = parkinggroupId;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, res, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 
@@ -349,12 +250,7 @@ function searchParkingPolicy(req, res) {
     var orgId = params.orgid.value;
     var siteId = params.siteid.value;
     var searchGroupPolicyObject = req.body;
-
-    console.log('orgId:' + orgId + ' siteId:' + siteId);
-
-    // for unique messages we can overide the message id here
-    var messageId = uuidv1(); // ⇨ 'af3da1c0-5cd9-11e7-8401-fb7c0283f80c' (based on timestamp)
-    console.log('messageId parkingpolicyId: ' + messageId);
+    var messageId = uuidv4();
     //Construct the payload that has to be sent to Kafka
     var payLoad = requestHandler.postSearchPolicyRequestHandle();
     payLoad.messageid = messageId;
@@ -363,15 +259,8 @@ function searchParkingPolicy(req, res) {
     payLoad.request.configprops.searchPayload = searchGroupPolicyObject;
 
     //Send the message to Kafka. 
-    kafkaConnector.produceKafkaMessage(config.kafka.requestTopic, payLoad, function (err, msg) {
-        console.log('produceParkingPolicyMessage err: ' + err + ' message: ' + msg);
-        if (!err) {
-            kafkaConnector.consumeKafkaMessage(messageId, function (err, msg) {
-                response.Done(err, msg.response, res, req);
-            });
-        } else {
-            response.Done(err, res, res, req);
-        }
+    kafkaConnector.Send(config.kafka.requestTopic, payLoad, function (err, msg) {
+        response.Done(err, msg, res, req);
     });
 }
 /**
