@@ -80,7 +80,7 @@ function getAppUserData(req, res) {
     payLoad.request.appuserdataprops.userdataid = userdataid;
     //Send the message to Kafka. 
     kafkaConnector.Send(config.kafka.userDataRequestTopic, payLoad, function (err, msg) {
-        response.Done(err, res, res, req);
+        response.Done(err, msg, res, req);
     });
 }
 

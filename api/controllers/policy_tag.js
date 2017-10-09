@@ -28,7 +28,7 @@ function getPolicyCategory(req, res) {
 
     //Send the message to Kafka. 
     kafkaConnector.Send(config.kafka.tagRequestTopic, payLoad, function (err, msg) {
-        response.Done(err, res, res, req);
+        response.Done(err, msg, res, req);
     });
 
 }
